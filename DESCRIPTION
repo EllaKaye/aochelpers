@@ -9,7 +9,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/EllaKaye/aochelpers
+URL: https://github.com/EllaKaye/aochelpers,
+    https://ellakaye.github.io/aochelpers/
 BugReports: https://github.com/EllaKaye/aochelpers/issues
 Imports: 
     cli,
