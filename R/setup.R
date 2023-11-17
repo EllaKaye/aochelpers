@@ -106,9 +106,11 @@ aoc_get_input <- function(day, year = NULL) {
 #' `index.qmd` and (if present) `script.R` files with the values of the year and day
 #' parameters, respectively. In addition, `aoc_new_day()` will also run
 #' `aoc_get_input()` to download the puzzle input and save it into the post
-#' directory. If you have your Advent of Code session token set in your
+#' directory.
+#'
+#' If you have your Advent of Code session token set in your
 #' `.Renviron` file, we recommend using `aoc_new_day()` over `aoc_new_post()`.
-#' If you wish to download and save your puzzle input manually, use
+#' If you wish to download and save your puzzle input separately, use
 #' `aoc_new_post()`.
 #'
 #' @inheritParams aoc_url
@@ -202,6 +204,7 @@ aoc_delete_input <- function(day, year = NULL) {
 }
 
 # delete post and input for a given day and year
+# also want to delete from _freeze if it exists there
 aoc_delete_day <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
 
