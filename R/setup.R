@@ -93,9 +93,28 @@ aoc_get_input <- function(day, year = NULL) {
 
 #' Set up up a new post
 #'
+#' Create the necessary directories for a new post, copy in template files and make them relevant to the day and year (see Details).
+#'
+#' `aoc_new_post()` and
+#' `aoc_new_day()` both assume they being called from a project with a directory
+#' `_templates`, with a subdirectory `post-template` that contains, at minimum,
+#' the file `index.qmd`. They will copy all the files in `post-template` into a
+#' directory `"./YYYY/day/DD"` where `YYYY` is the value of the year parameter and
+#' `DD` is value of the day parameter (creating these directories if they do not
+#' already exist). This path echoes the URL structure of the Advent of Code
+#' website. Additionally, they replace any instances of `YYYY` and `DD` in the
+#' `index.qmd` and (if present) `script.R` files with the values of the year and day
+#' parameters, respectively. In addition, `aoc_new_day()` will also run
+#' `aoc_get_input()` to download the puzzle input and save it into the post
+#' directory. If you have your Advent of Code session token set in your
+#' `.Renviron` file, we recommend using `aoc_new_day()` over `aoc_new_post()`.
+#' If you wish to download and save your puzzle input manually, use
+#' `aoc_new_post()`.
+#'
 #' @inheritParams aoc_url
-#' @return Creates a new day
+#' @return The path to the new day (invisibly)
 #' @export
+#' @seealso [aoc_get_input()]
 #' @examples \dontrun{aoc_new_post(1, 2022)}
 aoc_new_post <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
@@ -115,18 +134,29 @@ aoc_new_post <- function(day, year = NULL) {
 
 	template_path <- here::here("_templates", "post-template")
 
+	if (!dir.exists(template_path)) {
+		cli::cli_abort(c("You must have a directory {.file _templates/post-template} in your project.",
+										 "!" = "See {.fun aochelpers::aoc_new_post} for more information."))
+	}
+
 	file.copy(list.files(template_path, full.names = TRUE),
 						day_path,
 						recursive = TRUE)
 
 	# get index.qmd from the new post and swap YYYY and DD for the year and day
+
+	if (!file.exists(paste0(day_path, "/index.qmd"))) {
+		cli::cli_abort(c("You must have a file {.file index.qmd} in your {.file _templates/post-template} directory.",
+										 "!" = "See {.fun aochelpers::aoc_new_post} for more information."))
+	}
+
 	index_path <- paste0(day_path, "/index.qmd")
-	grep_YYYY_DD(index_path, day, year)
+	gsub_YYYY_DD(index_path, day, year)
 
 	# if there's a script.R, read it in and substitute the year and day
 	script_path <- paste0(day_path, "/script.R")
 	if (file.exists(script_path)) {
-		grep_YYYY_DD(script_path, day, year)
+		gsub_YYYY_DD(script_path, day, year)
 	}
 
 	invisible(day_path)
@@ -142,8 +172,16 @@ aoc_new_post <- function(day, year = NULL) {
 aoc_new_day <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
 
+	day_path <- here::here(year, "day", day)
+
+	if (dir.exists(day_path)) {
+		cli::cli_abort("A directory for Day {day} of {year} already exists.")
+	}
+
 	aoc_get_input(day, year)
 	aoc_new_post(day, year)
+
+	invisible(day_path)
 }
 
 
@@ -198,7 +236,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 	listing_path <- here::here(paste0(year, ".qmd"))
 	template_path <- here::here("_templates", "YYYY.qmd")
 	file.copy(template_path, listing_path)
-	grep_YYYY_DD(listing_path, "DD", year)
+	gsub_YYYY_DD(listing_path, "DD", year)
 
 
 	intro_template_path <- here::here("_templates", "YYYY-intro")
@@ -209,7 +247,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 		file.copy(list.files(intro_template_path, full.names = TRUE),
 							intro_post_path, recursive = TRUE)
 		intro_index_path <- paste0(intro_post_path, "/index.qmd")
-		grep_YYYY_DD(intro_index_path, "DD", year)
+		gsub_YYYY_DD(intro_index_path, "DD", year)
 	}
 
 	metadata_path <- here::here("_templates", "_metadata.yml")

@@ -36,7 +36,7 @@ check_day <- function(day) {
 	invisible(day)
 }
 
-grep_YYYY_DD <- function(path, day, year) {
+gsub_YYYY_DD <- function(path, day, year) {
 	if (file.exists(path)) {
 		file <- readLines(path)
 		file_with_year <- gsub("YYYY", year, file)
