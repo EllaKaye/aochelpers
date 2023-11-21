@@ -120,6 +120,8 @@ aoc_get_input <- function(day, year = NULL) {
 #' @examples \dontrun{aoc_new_post(1, 2022)}
 aoc_new_post <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
+	check_day(day)
+	check_year(year)
 
 	year_path <- here::here(year)
 	day_path <- here::here(year_path, "day", day)
@@ -186,10 +188,10 @@ aoc_new_day <- function(day, year = NULL) {
 	invisible(day_path)
 }
 
-
-# delete a post for a given day and year
 aoc_delete_post <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
+	check_day(day)
+	check_year(year)
 
 	post <- here::here(year, "day", day, "index.qmd")
 	unlink(post, recursive = TRUE)
@@ -198,40 +200,91 @@ aoc_delete_post <- function(day, year = NULL) {
 # delete the input for a given day and year
 aoc_delete_input <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
+	check_day(day)
+	check_year(year)
 
 	input_path <- here::here(year, "day", day, "input")
 	unlink(input_path)
 }
 
-# delete post and input for a given day and year
-# also want to delete from _freeze if it exists there
+#' Delete the directory for a day or year
+#'
+#' Assumes that the directory for the year has the relative path `"./YYYY"`
+#' and the directory for the day has the relative path `"./YYYY/day/DD"`, where `YYYY` and `DD` are the values of `year` and `day`.
+#' This will be the case if the post was created using [aoc_new_day()].
+#' If the directory for the day or year has a corresponding directory in `"./_freeze"`, that will also be deleted.
+#' Additionally, for `aoc_delete_year()`, the listing page `./YYYY.qmd` (where `YYYY` is the value of year) will be deleted.
+#'
+#' @inheritParams aoc_url
+#'
+#' @return The path of the day that was deleted (invisibly)
+#' @export
+#'
+#' @examples \dontrun{aoc_delete_day(1, 2022)}
 aoc_delete_day <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
+	check_day(day)
+	check_year(year)
 
 	day_path <- here::here(year, "day", day)
+	day_freeze_path <- here::here("_freeze", year, "day", day)
+
+	if (!dir.exists(day_path)) {
+		cli::cli_abort("No directory found for Day {day} of {year}.")
+	}
+
 	unlink(day_path, recursive = TRUE)
+
+	if (dir.exists(day_freeze_path)) {
+		unlink(day_freeze_path, recursive = TRUE)
+	}
+
+
+	invisible(day_path)
 }
 
 # aoc_new_day function gets input and creates a new post
 
 
-# aoc_new_year copies the listing template _YYYY.qmd
-# and creates new directories for the posts and input
-#' New year
+#' Create directory and files for a new year
+#'
+#' Creates a directory with relative path `./YYYY` (where `YYYY` is the value of
+#' `year`) and copies the listing template at `./_templates/YYYY.qmd` to
+#' `YYYY.qmd` and, for the latter, replaces `YYYY` with the value of `year`,
+#' both in the file name and in the file itself. Additionally, an introduction
+#' post and a `_metadata.yml` may be created. See Details for more information.
+#'
+#' The listing page, `./YYYY.qmd` (where `YYYY` is the value of
+#' `year`) picks up posts which are in the subdirectory `./YYYY/day` (which
+#' echoes the URL structure of the Advent of Code website). Note that the
+#' website will fail to render if there are no posts under the `day` directory.
+#' To avoid that problem, by default an introduction post `YYYY-intro` is
+#' created, assuming that the directory `./_templates/YYYY-intro` exists (which
+#' it does in the website template
+#' <https://github.com/EllaKaye/advent-of-code-website-template'>. If you don't
+#' want an introduction post, set `intro = FALSE` or delete the template.
+#'
+#' Additionally, if there is a file `./_templates/_metadata.yml`, this will be
+#' copied into `./YYYY/day/_metadata.yml`.
 #'
 #' @inheritParams aoc_url
-#' @param intro Logical. Whether to include an introduction post. See Details.
+#' @param intro Logical. Whether to include an introduction post.
 #'
-#' @return Creates a new year
+#' @return The path to the new year directory (invisibly)
 #' @export
+#'
+#' @seealso [aoc_new_day()]
 #'
 #' @examples \dontrun{aoc_new_year(2022)}
 aoc_new_year <- function(year = NULL, intro = TRUE) {
 	if (is.null(year)) year <- current_year()
+	check_year(year)
+
+	year_path <- here::here(year)
 
 	# create new year directory if it doesn't exist
-	if (!dir.exists(here::here(year))) {
-		dir.create(here::here(year))
+	if (!dir.exists(year_path)) {
+		dir.create(year_path)
 	}
 
 	# copy the _YYYY.qmd to year.qmd and replace YYYY with the year
@@ -253,24 +306,104 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 		gsub_YYYY_DD(intro_index_path, "DD", year)
 	}
 
+	day_path <- here::here(year, "day")
 	metadata_path <- here::here("_templates", "_metadata.yml")
 	if (file.exists(metadata_path)) {
+		if (!dir.exists(day_path)) {
+			dir.create(day_path)
+		}
 		file.copy(metadata_path, here::here(year, "day", "_metadata.yml"))
 	}
 
 	# message reminder to update _quarto.yml
 	cli::cli_bullets(c(
 		"!" = "Don't forget to update _quarto.yml, to list {year}.qmd in the navbar."))
+
+	invisible(year_path)
 }
 
+
+#' Create an introduction post
+#'
+#' @inheritParams aoc_url
+#'
+#' @return The path to the introduction post (invisibly)
+#' @export
+#'
+#' @examples \dontrun{aoc_new_introduction(2022)}
+aoc_new_introduction <- function(year = NULL) {
+	if (is.null(year)) year <- current_year()
+	check_year(year)
+
+	year_path <- here::here(year)
+
+	# create new year directory if it doesn't exist
+	if (!dir.exists(year_path)) {
+		dir.create(year_path)
+	}
+
+	intro_template_path <- here::here("_templates", paste0(year, "-intro"))
+
+	if (!dir.exists(intro_template_path)) {
+		cli::cli_abort(c("You must have a directory {.file _templates/YYYY-intro} in your {.file _templates} directory.",
+										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
+	}
+
+	intro_post_path <- here::here(year, "day", paste0(year, "-introduction"))
+
+	if (!dir.exists(intro_post_path)) {
+		dir.create(intro_post_path)
+	}
+
+	file.copy(list.files(intro_template_path, full.names = TRUE),
+						intro_post_path, recursive = TRUE)
+	intro_index_path <- paste0(intro_post_path, "/index.qmd")
+	gsub_YYYY_DD(intro_index_path, "DD", year)
+
+	invisible(intro_post_path)
+
+}
+
+#' Delete an introduction post
+#'
+#' @inheritParams aoc_url
+#'
+#' @export
+#'
+#' @examples \dontrun{aoc_delete_introduction(2022)}
+aoc_delete_introduction <- function(year = NULL) {
+	if (is.null(year)) year <- current_year()
+	check_year(year)
+
+	intro_post_path <- here::here(year, "day", paste0(year, "-introduction"))
+
+	if (!dir.exists(intro_post_path)) {
+		cli::cli_abort(c("You must have a directory {.file {year}/day/{year}-introduction}",
+										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
+	}
+
+	unlink(intro_post_path, recursive = TRUE)
+}
+
+
+#' @rdname aoc_delete_day
+#' @export
+#'
+#' @examples \dontrun{aoc_delete_year(2022)}
 aoc_delete_year <- function(year = NULL) {
 	if (is.null(year)) year <- current_year()
+	check_year(year)
 
-	year <- here::here(year)
-	unlink(year, recursive = TRUE)
+	year_path <- here::here(year)
+	unlink(year_path, recursive = TRUE)
+
+	freeze_path <- here::here("_freeze", year)
+
+	if (dir.exists(freeze_path)) {
+		unlink(freeze_path, recursive = TRUE)
+	}
+
 	unlink(paste0(year, ".qmd"))
-	unlink(here::here("_freeze", year), recursive = TRUE)
-
 	# message reminder to update _quarto.yml
 	cli::cli_bullets(c(
 		"!" = "You may need to update _quarto.yml, to remove {year}.qmd from the navbar."))

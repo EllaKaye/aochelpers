@@ -7,7 +7,7 @@ authors:
 template:
   bootstrap: 5
   bslib:
-    primary: "#3c8d0d"
+    primary: "#328800"
     base_font: "iAWriterQuattroS-Regular, Figtree, Helvetica, sans-serif"
     heading_font: "iAWriterQuattroS-Bold, sans-serif"
     code_font: "iAWriterMonoS-Regular, monospace"

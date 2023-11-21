@@ -24,7 +24,7 @@ Create the necessary directories for a new post, copy in template files and make
 \code{aoc_new_post()} and
 \code{aoc_new_day()} both assume they being called from a project with a directory
 \verb{_templates}, with a subdirectory \code{post-template} that contains, at minimum,
-the file \code{index.qmd}. It will copy all the files \code{post-template} into a
+the file \code{index.qmd}. They will copy all the files in \code{post-template} into a
 directory \code{"./YYYY/day/DD"} where \code{YYYY} is the value of the year parameter and
 \code{DD} is value of the day parameter (creating these directories if they do not
 already exist). This path echoes the URL structure of the Advent of Code
@@ -32,9 +32,11 @@ website. Additionally, they replace any instances of \code{YYYY} and \code{DD} i
 \code{index.qmd} and (if present) \code{script.R} files with the values of the year and day
 parameters, respectively. In addition, \code{aoc_new_day()} will also run
 \code{aoc_get_input()} to download the puzzle input and save it into the post
-directory. If you have your Advent of Code session token set in your
+directory.
+
+If you have your Advent of Code session token set in your
 \code{.Renviron} file, we recommend using \code{aoc_new_day()} over \code{aoc_new_post()}.
-If you wish to download and save your puzzle input manually, use
+If you wish to download and save your puzzle input separately, use
 \code{aoc_new_post()}.
 }
 \examples{

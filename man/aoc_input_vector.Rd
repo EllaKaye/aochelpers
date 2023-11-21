@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{aoc_input_vector}
 \alias{aoc_input_vector}
-\title{Read input as a vector}
+\title{Read puzzle input as a vector}
 \usage{
 aoc_input_vector(day, year = NULL, mode = c("character", "numeric"))
 }
@@ -14,11 +14,18 @@ aoc_input_vector(day, year = NULL, mode = c("character", "numeric"))
 \item{mode}{Character string. One of 'character' or 'numeric'. Default is 'character'.}
 }
 \value{
-A vector containing the puzzle input for the day and year
+A vector containing the puzzle input for the day and year.
 }
 \description{
-Read input as a vector
+Read in the puzzle input as a vector, one element per line.
+It assumes that the input is stored in a file called \code{input} in the directory
+\code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and \code{day}.
+This will be the case if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}.
+The reading is done by \code{\link[readr:read_lines]{readr::read_lines()}}.
 }
 \examples{
 \dontrun{aoc_input_vector(1, 2020, "numeric")}
+}
+\seealso{
+\code{\link[=aoc_input_data_frame]{aoc_input_data_frame()}} \code{\link[=aoc_input_matrix]{aoc_input_matrix()}}
 }

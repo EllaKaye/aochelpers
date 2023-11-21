@@ -2,21 +2,42 @@
 % Please edit documentation in R/setup.R
 \name{aoc_new_year}
 \alias{aoc_new_year}
-\title{New year}
+\title{Create directory and files for a new year}
 \usage{
 aoc_new_year(year = NULL, intro = TRUE)
 }
 \arguments{
 \item{year}{An integer representing the year. Defaults to the current year.}
 
-\item{intro}{Logical. Whether to include an introduction post. See Details.}
+\item{intro}{Logical. Whether to include an introduction post.}
 }
 \value{
-Creates a new year
+The path to the new year directory (invisibly)
 }
 \description{
-New year
+Creates a directory with relative path \code{./YYYY} (where \code{YYYY} is the value of
+\code{year}) and copies the listing template at \verb{./_templates/YYYY.qmd} to
+\code{YYYY.qmd} and, for the latter, replaces \code{YYYY} with the value of \code{year},
+both in the file name and in the file itself. Additionally, an introduction
+post and a \verb{_metadata.yml} may be created. See Details for more information.
+}
+\details{
+The listing page, \code{./YYYY.qmd} (where \code{YYYY} is the value of
+\code{year}) picks up posts which are in the subdirectory \code{./YYYY/day} (which
+echoes the URL structure of the Advent of Code website). Note that the
+website will fail to render if there are no posts under the \code{day} directory.
+To avoid that problem, by default an introduction post \code{YYYY-intro} is
+created, assuming that the directory \verb{./_templates/YYYY-intro} exists (which
+it does in the website template
+\url{https://github.com/EllaKaye/advent-of-code-website-template'}. If you don't
+want an introduction post, set \code{intro = FALSE} or delete the template.
+
+Additionally, if there is a file \verb{./_templates/_metadata.yml}, this will be
+copied into \verb{./YYYY/day/_metadata.yml}.
 }
 \examples{
 \dontrun{aoc_new_year(2022)}
+}
+\seealso{
+\code{\link[=aoc_new_day]{aoc_new_day()}}
 }
