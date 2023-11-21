@@ -16,10 +16,25 @@
     <loc>https://ellakaye.github.io/aochelpers/index.html</loc>
   </url>
   <url>
+    <loc>https://ellakaye.github.io/aochelpers/reference/aoc_delete_day.html</loc>
+  </url>
+  <url>
+    <loc>https://ellakaye.github.io/aochelpers/reference/aoc_delete_introduction.html</loc>
+  </url>
+  <url>
     <loc>https://ellakaye.github.io/aochelpers/reference/aoc_get_input.html</loc>
   </url>
   <url>
+    <loc>https://ellakaye.github.io/aochelpers/reference/aoc_input_data_frame.html</loc>
+  </url>
+  <url>
+    <loc>https://ellakaye.github.io/aochelpers/reference/aoc_input_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://ellakaye.github.io/aochelpers/reference/aoc_input_vector.html</loc>
+  </url>
+  <url>
+    <loc>https://ellakaye.github.io/aochelpers/reference/aoc_new_introduction.html</loc>
   </url>
   <url>
     <loc>https://ellakaye.github.io/aochelpers/reference/aoc_new_post.html</loc>

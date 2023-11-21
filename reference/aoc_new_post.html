@@ -74,7 +74,7 @@
     <p><code>aoc_new_post()</code> and
 <code>aoc_new_day()</code> both assume they being called from a project with a directory
 <code>_templates</code>, with a subdirectory <code>post-template</code> that contains, at minimum,
-the file <code>index.qmd</code>. It will copy all the files <code>post-template</code> into a
+the file <code>index.qmd</code>. They will copy all the files in <code>post-template</code> into a
 directory <code>"./YYYY/day/DD"</code> where <code>YYYY</code> is the value of the year parameter and
 <code>DD</code> is value of the day parameter (creating these directories if they do not
 already exist). This path echoes the URL structure of the Advent of Code
@@ -82,9 +82,10 @@ website. Additionally, they replace any instances of <code>YYYY</code> and <code
 <code>index.qmd</code> and (if present) <code>script.R</code> files with the values of the year and day
 parameters, respectively. In addition, <code>aoc_new_day()</code> will also run
 <code><a href="aoc_get_input.html">aoc_get_input()</a></code> to download the puzzle input and save it into the post
-directory. If you have your Advent of Code session token set in your
+directory.</p>
+<p>If you have your Advent of Code session token set in your
 <code>.Renviron</code> file, we recommend using <code>aoc_new_day()</code> over <code>aoc_new_post()</code>.
-If you wish to download and save your puzzle input manually, use
+If you wish to download and save your puzzle input separately, use
 <code>aoc_new_post()</code>.</p>
     </div>
     <div class="section level2">
