@@ -23,8 +23,8 @@ aoc_url <- function(day, year = NULL, browse = FALSE) {
 
 #' @rdname aoc_url
 #' @export
-#' @examples aoc_input_url(1, 2022)
-aoc_input_url <- function(day, year = NULL, browse = FALSE) {
+#' @examples aoc_url_input(1, 2022)
+aoc_url_input <- function(day, year = NULL, browse = FALSE) {
 	if (is.null(year)) year <- current_year()
 	check_day(day)
 	check_year(year)

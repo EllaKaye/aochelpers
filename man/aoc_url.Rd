@@ -2,12 +2,12 @@
 % Please edit documentation in R/setup.R
 \name{aoc_url}
 \alias{aoc_url}
-\alias{aoc_input_url}
+\alias{aoc_url_input}
 \title{Get URLs from the Advent of Code website}
 \usage{
 aoc_url(day, year = NULL, browse = FALSE)
 
-aoc_input_url(day, year = NULL, browse = FALSE)
+aoc_url_input(day, year = NULL, browse = FALSE)
 }
 \arguments{
 \item{day}{An integer between 1 and 25}
@@ -25,5 +25,5 @@ input for a given day and year.
 }
 \examples{
 aoc_url(1, 2022)
-aoc_input_url(1, 2022)
+aoc_url_input(1, 2022)
 }
