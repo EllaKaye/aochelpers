@@ -88,7 +88,15 @@ guidance on how to find your session token, see
 <a href="https://github.com/dgrtwo/adventdrob/tree/main#installation" class="external-link">https://github.com/dgrtwo/adventdrob/tree/main#installation</a>. Once you have
 your session token, you can set the environment variable with
 <code>usethis::edit_r_environ()</code>. This function is adapted from
-<a href="https://github.com/dgrtwo/adventdrob/blob/main/R/input.R" class="external-link">https://github.com/dgrtwo/adventdrob/blob/main/R/input.R</a>.</p>
+<a href="https://github.com/dgrtwo/adventdrob/blob/main/R/input.R" class="external-link">https://github.com/dgrtwo/adventdrob/blob/main/R/input.R</a>, but saves the
+input to a file instead of returning it as a data frame. Once the input is
+saved, it can be read in with <code><a href="aoc_input_vector.html">aoc_input_vector()</a></code>, <code><a href="aoc_input_data_frame.html">aoc_input_data_frame()</a></code> or
+<code><a href="aoc_input_matrix.html">aoc_input_matrix()</a></code>, whichever is appropriate for the puzzle.
+This function is also called as part of <code><a href="aoc_new_post.html">aoc_new_day()</a></code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="aoc_new_post.html">aoc_new_day()</a></code> <code><a href="aoc_input_vector.html">aoc_input_vector()</a></code> <code><a href="aoc_input_data_frame.html">aoc_input_data_frame()</a></code> [aoc_input_matrix()</p></div>
     </div>
 
     <div class="section level2">
