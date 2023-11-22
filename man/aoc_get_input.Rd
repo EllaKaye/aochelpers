@@ -29,8 +29,15 @@ guidance on how to find your session token, see
 \url{https://github.com/dgrtwo/adventdrob/tree/main#installation}. Once you have
 your session token, you can set the environment variable with
 \code{\link[usethis:edit]{usethis::edit_r_environ()}}. This function is adapted from
-\url{https://github.com/dgrtwo/adventdrob/blob/main/R/input.R}.
+\url{https://github.com/dgrtwo/adventdrob/blob/main/R/input.R}, but saves the
+input to a file instead of returning it as a data frame. Once the input is
+saved, it can be read in with \code{\link[=aoc_input_vector]{aoc_input_vector()}}, \code{\link[=aoc_input_data_frame]{aoc_input_data_frame()}} or
+\code{\link[=aoc_input_matrix]{aoc_input_matrix()}}, whichever is appropriate for the puzzle.
+This function is also called as part of \code{\link[=aoc_new_day]{aoc_new_day()}}.
 }
 \examples{
 \dontrun{aoc_get_input(1, 2022)}
+}
+\seealso{
+\code{\link[=aoc_new_day]{aoc_new_day()}} \code{\link[=aoc_input_vector]{aoc_input_vector()}} \code{\link[=aoc_input_data_frame]{aoc_input_data_frame()}} [aoc_input_matrix()
 }

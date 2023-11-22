@@ -48,12 +48,17 @@ aoc_url_input <- function(day, year = NULL, browse = FALSE) {
 #' <https://github.com/dgrtwo/adventdrob/tree/main#installation>. Once you have
 #' your session token, you can set the environment variable with
 #' [usethis::edit_r_environ()]. This function is adapted from
-#' <https://github.com/dgrtwo/adventdrob/blob/main/R/input.R>.
+#' <https://github.com/dgrtwo/adventdrob/blob/main/R/input.R>, but saves the
+#' input to a file instead of returning it as a data frame. Once the input is
+#' saved, it can be read in with [aoc_input_vector()], [aoc_input_data_frame()] or
+#' [aoc_input_matrix()], whichever is appropriate for the puzzle.
+#' This function is also called as part of [aoc_new_day()].
 #'
 #' @inheritParams aoc_url
 #' @return Returns, invisibly, a character string with the absolute path to the
 #'   input file.
 #' @export
+#' @seealso [aoc_new_day()] [aoc_input_vector()] [aoc_input_data_frame()] [aoc_input_matrix()
 #' @examples \dontrun{aoc_get_input(1, 2022)}
 aoc_get_input <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
