@@ -12,7 +12,7 @@ aoc_url_input(day, year = NULL, browse = FALSE)
 \arguments{
 \item{day}{An integer between 1 and 25}
 
-\item{year}{An integer representing the year. Defaults to the current year.}
+\item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 
 \item{browse}{logical - should the URL be opened in the browser?}
 }

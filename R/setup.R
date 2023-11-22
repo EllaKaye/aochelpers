@@ -6,7 +6,7 @@
 #' input for a given day and year.
 #'
 #' @param day An integer between 1 and 25
-#' @param year An integer representing the year. Defaults to the current year.
+#' @param year An integer representing the year, from 2015 to the current year. Defaults to the current year.
 #' @param browse logical - should the URL be opened in the browser?
 #' @return A character string with the URL
 #' @export
@@ -67,7 +67,7 @@ aoc_get_input <- function(day, year = NULL) {
 										 "!" = "See {.fun aochelpers::aoc_get_input} for more information."))
 	}
 
-	url <- aoc_input_url(day, year)
+	url <- aoc_url_input(day, year)
 
 	year_path <- here::here(year)
 	day_path <- here::here(year_path, "day", day)
@@ -188,6 +188,8 @@ aoc_new_day <- function(day, year = NULL) {
 	invisible(day_path)
 }
 
+# delete post for a given day and year
+# don't export
 aoc_delete_post <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
 	check_day(day)
@@ -197,6 +199,7 @@ aoc_delete_post <- function(day, year = NULL) {
 	unlink(post, recursive = TRUE)
 }
 
+# don't export
 # delete the input for a given day and year
 aoc_delete_input <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
@@ -209,11 +212,13 @@ aoc_delete_input <- function(day, year = NULL) {
 
 #' Delete the directory for a day or year
 #'
-#' Assumes that the directory for the year has the relative path `"./YYYY"`
-#' and the directory for the day has the relative path `"./YYYY/day/DD"`, where `YYYY` and `DD` are the values of `year` and `day`.
-#' This will be the case if the post was created using [aoc_new_day()].
-#' If the directory for the day or year has a corresponding directory in `"./_freeze"`, that will also be deleted.
-#' Additionally, for `aoc_delete_year()`, the listing page `./YYYY.qmd` (where `YYYY` is the value of year) will be deleted.
+#' Assumes that the directory for the year has the relative path `"./YYYY"` and
+#' the directory for the day has the relative path `"./YYYY/day/DD"`, where
+#' `YYYY` and `DD` are the values of `year` and `day`. This will be the case if
+#' the post was created using [aoc_new_day()]. If the directory for the day or
+#' year has a corresponding directory in `"./_freeze"`, that will also be
+#' deleted. Additionally, for `aoc_delete_year()`, the listing page `./YYYY.qmd`
+#' (where `YYYY` is the value of year) will be deleted.
 #'
 #' @inheritParams aoc_url
 #'
@@ -243,29 +248,36 @@ aoc_delete_day <- function(day, year = NULL) {
 	invisible(day_path)
 }
 
-# aoc_new_day function gets input and creates a new post
-
-
 #' Create directory and files for a new year
 #'
 #' Creates a directory with relative path `./YYYY` (where `YYYY` is the value of
-#' `year`) and copies the listing template at `./_templates/YYYY.qmd` to
+#' `year`) and copies the listing template at `"./_templates/YYYY.qmd"` to
 #' `YYYY.qmd` and, for the latter, replaces `YYYY` with the value of `year`,
 #' both in the file name and in the file itself. Additionally, an introduction
 #' post and a `_metadata.yml` may be created. See Details for more information.
 #'
-#' The listing page, `./YYYY.qmd` (where `YYYY` is the value of
-#' `year`) picks up posts which are in the subdirectory `./YYYY/day` (which
-#' echoes the URL structure of the Advent of Code website). Note that the
-#' website will fail to render if there are no posts under the `day` directory.
-#' To avoid that problem, by default an introduction post `YYYY-intro` is
-#' created, assuming that the directory `./_templates/YYYY-intro` exists (which
-#' it does in the website template
+#' The listing page, `./YYYY.qmd` (where `YYYY` is the value of `year`) picks up
+#' posts which are in the subdirectory `./YYYY/day` (which echoes the URL
+#' structure of the Advent of Code website). Note that the website will fail to
+#' render if there are no posts under the `day` directory. To avoid that
+#' problem, by default an introduction post `YYYY-intro` is created, assuming
+#' that the directory `./_templates/YYYY-intro` exists (which it does in the
+#' website template
 #' <https://github.com/EllaKaye/advent-of-code-website-template'>. If you don't
-#' want an introduction post, set `intro = FALSE` or delete the template.
+#' want an introduction post, set `intro = FALSE`. An introduction post can also
+#' be created separately with [aoc_new_intro()] or deleted with
+#' [aoc_delete_intro()]. Without an introduction post, note that you will need
+#' at least one other post, e.g. through a call to [aoc_new_day()] before
+#' rendering the website.
 #'
 #' Additionally, if there is a file `./_templates/_metadata.yml`, this will be
-#' copied into `./YYYY/day/_metadata.yml`.
+#' copied into `./YYYY/day/_metadata.yml`. This file is used to set the metadata
+#' only for the posts in the `day` directory.
+#'
+#' If there is no intro post and no `_metadata.yml` file, then only the
+#' `"./YYYY"` directory will be created, not the subdirectory `./YYYY/day`. The
+#' latter will then be created on the first call to [aoc_new_day()] for that
+#' year. In this case, the website will render after a call to [aoc_new_year()].
 #'
 #' @inheritParams aoc_url
 #' @param intro Logical. Whether to include an introduction post.
@@ -273,7 +285,8 @@ aoc_delete_day <- function(day, year = NULL) {
 #' @return The path to the new year directory (invisibly)
 #' @export
 #'
-#' @seealso [aoc_new_day()]
+#' @seealso [aoc_new_day()], [aoc_new_intro()], [aoc_delete_intro()],
+#'   [aoc_delete_year()]
 #'
 #' @examples \dontrun{aoc_new_year(2022)}
 aoc_new_year <- function(year = NULL, intro = TRUE) {
@@ -325,13 +338,20 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 
 #' Create an introduction post
 #'
+#' Create an intro post with relative path `./YYYY/day/YYYY-intro` (where `YYYY`
+#' is the value of `year`) by copying the template at `./_templates/YYYY-intro`
+#' and substituting `YYYY` for the value of `year`, both in the new file name and in the
+#' file itself.
+#'
 #' @inheritParams aoc_url
 #'
 #' @return The path to the introduction post (invisibly)
 #' @export
 #'
+#' @seealso [aoc_delete_intro()] [aoc_new_year()]
+#'
 #' @examples \dontrun{aoc_new_introduction(2022)}
-aoc_new_introduction <- function(year = NULL) {
+aoc_new_intro <- function(year = NULL) {
 	if (is.null(year)) year <- current_year()
 	check_year(year)
 
@@ -366,12 +386,17 @@ aoc_new_introduction <- function(year = NULL) {
 
 #' Delete an introduction post
 #'
+#' Delete the introduction post with relative path `./YYYY/day/YYYY-intro` (where `YYYY`
+#' is the value of `year`), if it exists.
+#'
 #' @inheritParams aoc_url
 #'
 #' @export
 #'
+#' @seealso [aoc_new_intro()] [aoc_new_year()] [aoc_delete_year()]
+#'
 #' @examples \dontrun{aoc_delete_introduction(2022)}
-aoc_delete_introduction <- function(year = NULL) {
+aoc_delete_intro <- function(year = NULL) {
 	if (is.null(year)) year <- current_year()
 	check_year(year)
 

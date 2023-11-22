@@ -9,7 +9,7 @@ aoc_input_vector(day, year = NULL, mode = c("character", "numeric"))
 \arguments{
 \item{day}{An integer between 1 and 25}
 
-\item{year}{An integer representing the year. Defaults to the current year.}
+\item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 
 \item{mode}{Character string. One of 'character' or 'numeric'. Default is 'character'.}
 }

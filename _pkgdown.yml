@@ -1,9 +1,5 @@
 url: https://ellakaye.github.io/aochelpers/
 
-authors:
-  Ella Kaye:
-    href: https://ellakaye.co.uk
-
 template:
   bootstrap: 5
   bslib:
@@ -11,3 +7,29 @@ template:
     base_font: "iAWriterQuattroS-Regular, Figtree, Helvetica, sans-serif"
     heading_font: "iAWriterQuattroS-Bold, sans-serif"
     code_font: "iAWriterMonoS-Regular, monospace"
+
+authors:
+  Ella Kaye:
+    href: https://ellakaye.co.uk
+
+reference:
+  - title: "Interact with Advent of Code website"
+    contents:
+    - aoc_url
+    - aoc_url_input
+    - aoc_get_input
+  - title: "Create or delete files on your Advent of Code Quarto website"
+    contents:
+    - aoc_new_year
+    - aoc_new_day
+    - aoc_new_post
+    - aoc_new_intro
+    - aoc_get_input
+    - aoc_delete_year
+    - aoc_delete_day
+    - aoc_delete_intro
+  - title: "Read in puzzle input stored in your Quarto website"
+    contents:
+    - aoc_input_data_frame
+    - aoc_input_matrix
+    - aoc_input_vector

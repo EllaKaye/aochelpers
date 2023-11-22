@@ -7,7 +7,7 @@
 aoc_new_year(year = NULL, intro = TRUE)
 }
 \arguments{
-\item{year}{An integer representing the year. Defaults to the current year.}
+\item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 
 \item{intro}{Logical. Whether to include an introduction post.}
 }
@@ -16,28 +16,39 @@ The path to the new year directory (invisibly)
 }
 \description{
 Creates a directory with relative path \code{./YYYY} (where \code{YYYY} is the value of
-\code{year}) and copies the listing template at \verb{./_templates/YYYY.qmd} to
+\code{year}) and copies the listing template at \code{"./_templates/YYYY.qmd"} to
 \code{YYYY.qmd} and, for the latter, replaces \code{YYYY} with the value of \code{year},
 both in the file name and in the file itself. Additionally, an introduction
 post and a \verb{_metadata.yml} may be created. See Details for more information.
 }
 \details{
-The listing page, \code{./YYYY.qmd} (where \code{YYYY} is the value of
-\code{year}) picks up posts which are in the subdirectory \code{./YYYY/day} (which
-echoes the URL structure of the Advent of Code website). Note that the
-website will fail to render if there are no posts under the \code{day} directory.
-To avoid that problem, by default an introduction post \code{YYYY-intro} is
-created, assuming that the directory \verb{./_templates/YYYY-intro} exists (which
-it does in the website template
+The listing page, \code{./YYYY.qmd} (where \code{YYYY} is the value of \code{year}) picks up
+posts which are in the subdirectory \code{./YYYY/day} (which echoes the URL
+structure of the Advent of Code website). Note that the website will fail to
+render if there are no posts under the \code{day} directory. To avoid that
+problem, by default an introduction post \code{YYYY-intro} is created, assuming
+that the directory \verb{./_templates/YYYY-intro} exists (which it does in the
+website template
 \url{https://github.com/EllaKaye/advent-of-code-website-template'}. If you don't
-want an introduction post, set \code{intro = FALSE} or delete the template.
+want an introduction post, set \code{intro = FALSE}. An introduction post can also
+be created separately with \code{\link[=aoc_new_intro]{aoc_new_intro()}} or deleted with
+\code{\link[=aoc_delete_intro]{aoc_delete_intro()}}. Without an introduction post, note that you will need
+at least one other post, e.g. through a call to \code{\link[=aoc_new_day]{aoc_new_day()}} before
+rendering the website.
 
 Additionally, if there is a file \verb{./_templates/_metadata.yml}, this will be
-copied into \verb{./YYYY/day/_metadata.yml}.
+copied into \verb{./YYYY/day/_metadata.yml}. This file is used to set the metadata
+only for the posts in the \code{day} directory.
+
+If there is no intro post and no \verb{_metadata.yml} file, then only the
+\code{"./YYYY"} directory will be created, not the subdirectory \code{./YYYY/day}. The
+latter will then be created on the first call to \code{\link[=aoc_new_day]{aoc_new_day()}} for that
+year. In this case, the website will render after a call to \code{\link[=aoc_new_year]{aoc_new_year()}}.
 }
 \examples{
 \dontrun{aoc_new_year(2022)}
 }
 \seealso{
-\code{\link[=aoc_new_day]{aoc_new_day()}}
+\code{\link[=aoc_new_day]{aoc_new_day()}}, \code{\link[=aoc_new_intro]{aoc_new_intro()}}, \code{\link[=aoc_delete_intro]{aoc_delete_intro()}},
+\code{\link[=aoc_delete_year]{aoc_delete_year()}}
 }
