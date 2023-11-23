@@ -367,7 +367,7 @@ aoc_new_intro <- function(year = NULL) {
 		dir.create(year_path)
 	}
 
-	intro_template_path <- here::here("_templates", paste0(year, "-intro"))
+	intro_template_path <- here::here("_templates", "YYYY-intro")
 
 	if (!dir.exists(intro_template_path)) {
 		cli::cli_abort(c("You must have a directory {.file _templates/YYYY-intro} in your {.file _templates} directory.",
