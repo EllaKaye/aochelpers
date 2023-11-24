@@ -68,6 +68,8 @@ aoc_new_day(2, 2022) # day 2 of specified year
 
 See the [advent-of-code-website-template repo](https://gihub.com/EllaKaye/advent-of-code-website-template) for further details about the default contents of `_templates`.
 
+There are other functions for creating and deleting directories and files based on the advent-of-code-website-template. See the [Reference](https://ellakaye.github.io/aochelpers/reference/index.html) page for details.
+
 ## Reading in puzzle input
 
 **aochelpers** provides a number of functions to read in puzzle input, once saved from the Advent of Code website. The functions are designed to be used in conjunction with the Advent of Code website template, so to see the output of the functions, see the repo <https://github.com/EllaKaye/advent-of-code-website-template/> and the corresponding site, <https://ellakaye.github.io/advent-of-code-website-template/>, for examples of their output.

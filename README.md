@@ -87,6 +87,11 @@ See the [advent-of-code-website-template
 repo](https://gihub.com/EllaKaye/advent-of-code-website-template) for
 further details about the default contents of `_templates`.
 
+There are other functions for creating and deleting directories and
+files based on the advent-of-code-website-template. See the
+[Reference](https://ellakaye.github.io/aochelpers/reference/index.html)
+page for details.
+
 ## Reading in puzzle input
 
 **aochelpers** provides a number of functions to read in puzzle input,
