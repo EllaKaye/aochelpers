@@ -5,14 +5,25 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="What the package does (one paragraph).">
-<title>What the Package Does (One Line, Title Case) • aochelpers</title>
+<meta name="description" content="Use with advent-of-code-website-template to create a website
+    for Advent of Code solutions. Also includes functions for getting and 
+    reading in puzzle input.">
+<title>Companion to Advent of Code and Associated Personal Website • aochelpers</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta property="og:description" content="What the package does (one paragraph).">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Companion to Advent of Code and Associated Personal Website">
+<meta property="og:description" content="Use with advent-of-code-website-template to create a website
+    for Advent of Code solutions. Also includes functions for getting and 
+    reading in puzzle input.">
+<meta property="og:image" content="https://ellakaye.github.io/aochelpers/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -58,9 +69,61 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="aochelpers">aochelpers<a class="anchor" aria-label="anchor" href="#aochelpers"></a>
-</h1></div>
-<p>A work-in-progress R package to accompany my <a href="https://adventofcode.ellakaye.co.uk" class="external-link">Advent of Code website</a> and the associated <a href="https://github.com/EllaKaye/advent-of-code-website-template" class="external-link">template</a>.</p>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="aochelpers-">aochelpers 
+<a class="anchor" aria-label="anchor" href="#aochelpers-"></a>
+</h1>
+</div>
+<!-- badges: start -->
+<!-- badges: end -->
+<p><strong>aochelpers</strong> is a companion package to the Advent of Code website template: <a href="https://github.com/EllaKaye/advent-of-code-website-template/" class="external-link uri">https://github.com/EllaKaye/advent-of-code-website-template/</a>. It contains functions to create new listings and posts corresponding to years and days of the Advent of Code challenges. It also contains functions to download and save puzzle input from the Advent of Code website, and to read it in to R in a variety of formats. In time, I will add functions that are useful in solving the puzzles.</p>
+<p>The functions are designed to be used in conjunction with the Advent of Code website template, and so are easier to demonstrate in that context than here, so see the repo <a href="https://github.com/EllaKaye/advent-of-code-website-template/" class="external-link uri">https://github.com/EllaKaye/advent-of-code-website-template/</a> and the corresponding demo site, <a href="https://ellakaye.github.io/advent-of-code-website-template/" class="external-link uri">https://ellakaye.github.io/advent-of-code-website-template/</a>, for further documentation and an example.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of aochelpers from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"EllaKaye/aochelpers"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="adding-listings-pages-and-posts">Adding listings pages and posts<a class="anchor" aria-label="anchor" href="#adding-listings-pages-and-posts"></a>
+</h2>
+<p>The main functions in <em>aochelpers</em> are <code><a href="reference/aoc_new_year.html">aoc_new_year()</a></code> and <code><a href="reference/aoc_new_post.html">aoc_new_day()</a></code>. They copy files from the website’s <code>"_template"</code> directory, and paste them into the appropriate location in the website directory. Moreover, in the copies, they replace any instances of <code>YYYY</code> and <code>DD</code> in the templates with the values of the <code>year</code> and <code>day</code> arguments, respectively, both in the directory and file names, and in the contents of the .qmd files themselves. In the descriptions below, the <code>YYYY</code> and <code>DD</code> placeholders are used to indicate where the year and day values will be inserted.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/EllaKaye/aochelpers" class="external-link">aochelpers</a></span><span class="op">)</span></span>
+<span><span class="co"># Add a listing page a directory for a new year</span></span>
+<span><span class="fu"><a href="reference/aoc_new_year.html">aoc_new_year</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># current year </span></span>
+<span><span class="fu"><a href="reference/aoc_new_year.html">aoc_new_year</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="co"># specified year</span></span>
+<span></span>
+<span><span class="co"># Add a post for a new day</span></span>
+<span><span class="fu"><a href="reference/aoc_new_post.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># day 1 of current year</span></span>
+<span><span class="fu"><a href="reference/aoc_new_post.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2022</span><span class="op">)</span> <span class="co"># day 2 of specified year</span></span></code></pre></div>
+<p><a href="https://ellakaye.github.io/aochelpers/reference/aoc_new_year.html"><code>aoc_new_year()</code></a> will</p>
+<ul>
+<li>create a new directory for the specified year, at <code>./YYYY/</code>.</li>
+<li>create a new listing page for the year, as <code>./YYYY.qmd</code>. The listing page will be created using the template <code>./_templates/YYYY.qmd</code>. The listing page picks up posts from the <code>YYYY/day</code> directory. (This directory structure echoes the structure of the Advent of Code website.)</li>
+<li>optionally create an introductory post for the year, as <code>./YYYY/day/YYYY-introduction</code>, using the template <code>./_templates/YYYY-intro</code>. The post will be created only if the <code>intro</code> argument is <code>TRUE</code> (the default). Note that, as of Quarto v1.4, there needs to be at least one post in the <code>YYYY/day</code> directory for the website to render without error.</li>
+<li>if <code>_templates/_metadata.yml</code> exists, it will be copied to <code>./YYYY/day/_metadata.yml</code>.</li>
+</ul>
+<p><a href="https://ellakaye.github.io/aochelpers/reference/aoc_new_day.html"><code>aoc_new_day()</code></a> will</p>
+<ul>
+<li>create a new directory for the specified day, at <code>./YYYY/day/DD/</code>
+</li>
+<li>copy the contents of <code>_templates/post-template</code> into the above directory</li>
+<li>download the puzzle input for the day from the Advent of Code website, and save it as <code>./YYYY/day/DD/input</code>
+</li>
+</ul>
+<p>See the <a href="https://gihub.com/EllaKaye/advent-of-code-website-template" class="external-link">advent-of-code-website-template repo</a> for further details about the default contents of <code>_templates</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="reading-in-puzzle-input">Reading in puzzle input<a class="anchor" aria-label="anchor" href="#reading-in-puzzle-input"></a>
+</h2>
+<p><strong>aochelpers</strong> provides a number of functions to read in puzzle input, once saved from the Advent of Code website. The functions are designed to be used in conjunction with the Advent of Code website template, so to see the output of the functions, see the repo <a href="https://github.com/EllaKaye/advent-of-code-website-template/" class="external-link uri">https://github.com/EllaKaye/advent-of-code-website-template/</a> and the corresponding site, <a href="https://ellakaye.github.io/advent-of-code-website-template/" class="external-link uri">https://ellakaye.github.io/advent-of-code-website-template/</a>, for examples of their output.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/aoc_input_vector.html">aoc_input_vector</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2022</span>, <span class="st">"numeric"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/aoc_input_data_frame.html">aoc_input_data_frame</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2022</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
