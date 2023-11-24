@@ -2,7 +2,7 @@ Package: aochelpers
 Title: Companion to Advent of Code and Associated Personal Website
 Version: 0.0.0.9000
 Authors@R: 
-    person("Ella", "Kaye", , "ella.kaye@gmail.com", role = c("aut", "cre"),
+    person("Ella", "Kaye", , "ella.kaye@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-7300-3718"))
 Description: Use with advent-of-code-website-template to create a website
     for Advent of Code solutions. Also includes functions for getting and 
