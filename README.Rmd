@@ -66,7 +66,7 @@ aoc_new_day(2, 2022) # day 2 of specified year
 - copy the contents of `_templates/post-template` into the above directory
 - download the puzzle input for the day from the Advent of Code website, and save it as `./YYYY/day/DD/input`
 
-See the [advent-of-code-website-template repo](https://gihub.com/EllaKaye/advent-of-code-website-template) for further details about the default contents of `_templates`.
+See the [advent-of-code-website-template repo](https://github.com/EllaKaye/advent-of-code-website-template) for further details about the default contents of `_templates`.
 
 There are other functions for creating and deleting directories and files based on the advent-of-code-website-template. See the [Reference](https://ellakaye.github.io/aochelpers/reference/index.html) page for details.
 

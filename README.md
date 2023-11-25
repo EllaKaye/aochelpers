@@ -84,7 +84,7 @@ will
   and save it as `./YYYY/day/DD/input`
 
 See the [advent-of-code-website-template
-repo](https://gihub.com/EllaKaye/advent-of-code-website-template) for
+repo](https://github.com/EllaKaye/advent-of-code-website-template) for
 further details about the default contents of `_templates`.
 
 There are other functions for creating and deleting directories and
