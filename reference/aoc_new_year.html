@@ -92,19 +92,19 @@ website template
 want an introduction post, set <code>intro = FALSE</code>. An introduction post can also
 be created separately with <code><a href="aoc_new_intro.html">aoc_new_intro()</a></code> or deleted with
 <code><a href="aoc_delete_intro.html">aoc_delete_intro()</a></code>. Without an introduction post, note that you will need
-at least one other post, e.g. through a call to <code><a href="aoc_new_post.html">aoc_new_day()</a></code> before
+at least one other post, e.g. through a call to <code><a href="aoc_new_day.html">aoc_new_day()</a></code> before
 rendering the website.</p>
 <p>Additionally, if there is a file <code>./_templates/_metadata.yml</code>, this will be
 copied into <code>./YYYY/day/_metadata.yml</code>. This file is used to set the metadata
 only for the posts in the <code>day</code> directory.</p>
 <p>If there is no intro post and no <code>_metadata.yml</code> file, then only the
 <code>"./YYYY"</code> directory will be created, not the subdirectory <code>./YYYY/day</code>. The
-latter will then be created on the first call to <code><a href="aoc_new_post.html">aoc_new_day()</a></code> for that
+latter will then be created on the first call to <code><a href="aoc_new_day.html">aoc_new_day()</a></code> for that
 year. In this case, the website will render after a call to <code>aoc_new_year()</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="aoc_new_post.html">aoc_new_day()</a></code>, <code><a href="aoc_new_intro.html">aoc_new_intro()</a></code>, <code><a href="aoc_delete_intro.html">aoc_delete_intro()</a></code>,
+    <div class="dont-index"><p><code><a href="aoc_new_day.html">aoc_new_day()</a></code>, <code><a href="aoc_new_intro.html">aoc_new_intro()</a></code>, <code><a href="aoc_delete_intro.html">aoc_delete_intro()</a></code>,
 <code><a href="aoc_delete_day.html">aoc_delete_year()</a></code></p></div>
     </div>
 

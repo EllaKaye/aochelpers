@@ -89,7 +89,7 @@
 <div class="section level2">
 <h2 id="adding-listings-pages-and-posts">Adding listings pages and posts<a class="anchor" aria-label="anchor" href="#adding-listings-pages-and-posts"></a>
 </h2>
-<p>The main functions in <em>aochelpers</em> are <code><a href="reference/aoc_new_year.html">aoc_new_year()</a></code> and <code><a href="reference/aoc_new_post.html">aoc_new_day()</a></code>. They copy files from the website’s <code>"_template"</code> directory, and paste them into the appropriate location in the website directory. Moreover, in the copies, they replace any instances of <code>YYYY</code> and <code>DD</code> in the templates with the values of the <code>year</code> and <code>day</code> arguments, respectively, both in the directory and file names, and in the contents of the .qmd files themselves. In the descriptions below, the <code>YYYY</code> and <code>DD</code> placeholders are used to indicate where the year and day values will be inserted.</p>
+<p>The main functions in <em>aochelpers</em> are <code><a href="reference/aoc_new_year.html">aoc_new_year()</a></code> and <code><a href="reference/aoc_new_day.html">aoc_new_day()</a></code>. They copy files from the website’s <code>"_template"</code> directory, and paste them into the appropriate location in the website directory. Moreover, in the copies, they replace any instances of <code>YYYY</code> and <code>DD</code> in the templates with the values of the <code>year</code> and <code>day</code> arguments, respectively, both in the directory and file names, and in the contents of the .qmd files themselves. In the descriptions below, the <code>YYYY</code> and <code>DD</code> placeholders are used to indicate where the year and day values will be inserted.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/EllaKaye/aochelpers" class="external-link">aochelpers</a></span><span class="op">)</span></span>
 <span><span class="co"># Add a listing page a directory for a new year</span></span>
@@ -97,8 +97,8 @@
 <span><span class="fu"><a href="reference/aoc_new_year.html">aoc_new_year</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">)</span> <span class="co"># specified year</span></span>
 <span></span>
 <span><span class="co"># Add a post for a new day</span></span>
-<span><span class="fu"><a href="reference/aoc_new_post.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># day 1 of current year</span></span>
-<span><span class="fu"><a href="reference/aoc_new_post.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2022</span><span class="op">)</span> <span class="co"># day 2 of specified year</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/aoc_new_day.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># day 1 of current year</span></span>
+<span><span class="fu"><a href="reference/aoc_new_day.html">aoc_new_day</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2022</span><span class="op">)</span> <span class="co"># day 2 of specified year</span></span></code></pre></div>
 <p><a href="https://ellakaye.github.io/aochelpers/reference/aoc_new_year.html"><code>aoc_new_year()</code></a> will</p>
 <ul>
 <li>create a new directory for the specified year, at <code>./YYYY/</code>.</li>
