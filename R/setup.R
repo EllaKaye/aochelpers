@@ -96,7 +96,7 @@ aoc_get_input <- function(day, year = NULL) {
 	invisible(input_path)
 }
 
-#' Set up up a new post
+#' Set up a new day
 #'
 #' Create the necessary directories for a new post, copy in template files and make them relevant to the day and year (see Details).
 #'
@@ -118,10 +118,31 @@ aoc_get_input <- function(day, year = NULL) {
 #' If you wish to download and save your puzzle input separately, use
 #' `aoc_new_post()`.
 #'
-#' @inheritParams aoc_url
 #' @return The path to the new day (invisibly)
+#'
 #' @export
+#'
 #' @seealso [aoc_get_input()]
+#'
+#' @examples \dontrun{aoc_new_day(1, 2022)}
+aoc_new_day <- function(day, year = NULL) {
+	if (is.null(year)) year <- current_year()
+
+	day_path <- here::here(year, "day", day)
+
+	if (dir.exists(day_path)) {
+		cli::cli_abort("A directory for Day {day} of {year} already exists.")
+	}
+
+	aoc_get_input(day, year)
+	aoc_new_post(day, year)
+
+	invisible(day_path)
+}
+
+#' @rdname aoc_new_day
+#' @inheritParams aoc_url
+#' @export
 #' @examples \dontrun{aoc_new_post(1, 2022)}
 aoc_new_post <- function(day, year = NULL) {
 	if (is.null(year)) year <- current_year()
@@ -170,27 +191,6 @@ aoc_new_post <- function(day, year = NULL) {
 
 	invisible(day_path)
 
-}
-
-#' Set up up a new post
-#'
-#' @rdname aoc_new_post
-#' @export
-#'
-#' @examples \dontrun{aoc_new_day(1, 2022)}
-aoc_new_day <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-
-	day_path <- here::here(year, "day", day)
-
-	if (dir.exists(day_path)) {
-		cli::cli_abort("A directory for Day {day} of {year} already exists.")
-	}
-
-	aoc_get_input(day, year)
-	aoc_new_post(day, year)
-
-	invisible(day_path)
 }
 
 # delete post for a given day and year
