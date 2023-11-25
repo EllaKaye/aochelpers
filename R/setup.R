@@ -268,7 +268,7 @@ aoc_delete_day <- function(day, year = NULL) {
 #' problem, by default an introduction post `YYYY-intro` is created, assuming
 #' that the directory `./_templates/YYYY-intro` exists (which it does in the
 #' website template
-#' <https://github.com/EllaKaye/advent-of-code-website-template'>. If you don't
+#' <https://github.com/EllaKaye/advent-of-code-website-template>. If you don't
 #' want an introduction post, set `intro = FALSE`. An introduction post can also
 #' be created separately with [aoc_new_intro()] or deleted with
 #' [aoc_delete_intro()]. Without an introduction post, note that you will need

@@ -29,7 +29,7 @@ render if there are no posts under the \code{day} directory. To avoid that
 problem, by default an introduction post \code{YYYY-intro} is created, assuming
 that the directory \verb{./_templates/YYYY-intro} exists (which it does in the
 website template
-\url{https://github.com/EllaKaye/advent-of-code-website-template'}. If you don't
+\url{https://github.com/EllaKaye/advent-of-code-website-template}. If you don't
 want an introduction post, set \code{intro = FALSE}. An introduction post can also
 be created separately with \code{\link[=aoc_new_intro]{aoc_new_intro()}} or deleted with
 \code{\link[=aoc_delete_intro]{aoc_delete_intro()}}. Without an introduction post, note that you will need
