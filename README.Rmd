@@ -38,7 +38,7 @@ remotes::install_github("EllaKaye/aochelpers")
 
 ## Adding listings pages and posts
 
-The main functions in *aochelpers* are `aoc_new_year()` and `aoc_new_day()`. 
+The main functions in **aochelpers** are `aoc_new_year()` and `aoc_new_day()`. 
 They copy files from the website's `"_template"` directory, and paste them into the appropriate location in the website directory. Moreover, in the copies, they replace any instances of `YYYY` and `DD` in the templates with the values of the `year` and `day` arguments, respectively, both in the directory and file names, and in the contents of the .qmd files themselves. In the descriptions below, the `YYYY` and `DD` placeholders are used to indicate where the year and day values will be inserted.
 
 ```{r example}

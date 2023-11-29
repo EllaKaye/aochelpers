@@ -35,7 +35,7 @@ remotes::install_github("EllaKaye/aochelpers")
 
 ## Adding listings pages and posts
 
-The main functions in *aochelpers* are `aoc_new_year()` and
+The main functions in **aochelpers** are `aoc_new_year()` and
 `aoc_new_day()`. They copy files from the website’s `"_template"`
 directory, and paste them into the appropriate location in the website
 directory. Moreover, in the copies, they replace any instances of `YYYY`
