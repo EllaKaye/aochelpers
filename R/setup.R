@@ -91,7 +91,10 @@ aoc_get_input <- function(day, year = NULL) {
 	# get and save the input
 	req <- httr::GET(url,
 									 httr::set_cookies(session = session),
+									 httr::user_agent("aochelpers R package <https://github.com/EllaKaye/aochelpers>"),
 									 httr::write_disk(input_path, overwrite = TRUE))
+
+	httr::stop_for_status(req)
 
 	invisible(input_path)
 }
