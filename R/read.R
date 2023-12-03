@@ -51,7 +51,7 @@ aoc_input_vector <- function(day, year = NULL, mode = c("character", "numeric"))
 #' the input is stored in a file called `input` in the directory
 #' `"./YYYY/day/DD"`, where `YYYY` and `DD` are the values of `year` and `day`.
 #' This will be the case if the post was created using [aoc_new_day()]. If the
-#' class is `tbl_df`, the reading is done by [readr::read_delim()]. If the class
+#' class is `tbl_df`, the reading is done by [readr::read_table()]. If the class
 #' is `data.frame`, the reading is done by [utils::read.table()].
 #' The defaults have been chosen to suit typical Advent of Code puzzle input.
 #'
@@ -80,7 +80,7 @@ aoc_input_data_frame <- function(day, year = NULL, class = c("tbl_df", "data.fra
 	class <- rlang::arg_match(class)
 
 	if (class == "tbl_df") {
-		input <- readr::read_delim(path, col_names = col_names, show_col_types = show_col_types)
+		input <- readr::read_table(path, col_names = col_names, show_col_types = show_col_types)
 	} else if (class == "data.frame") {
 		input <- utils::read.table(path)
 	}

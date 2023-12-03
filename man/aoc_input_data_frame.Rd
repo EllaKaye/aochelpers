@@ -38,7 +38,7 @@ A data frame containing the puzzle input for the day and year.
 the input is stored in a file called \code{input} in the directory
 \code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and \code{day}.
 This will be the case if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}. If the
-class is \code{tbl_df}, the reading is done by \code{\link[readr:read_delim]{readr::read_delim()}}. If the class
+class is \code{tbl_df}, the reading is done by \code{\link[readr:read_table]{readr::read_table()}}. If the class
 is \code{data.frame}, the reading is done by \code{\link[utils:read.table]{utils::read.table()}}.
 The defaults have been chosen to suit typical Advent of Code puzzle input.
 }
