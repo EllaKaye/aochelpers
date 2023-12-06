@@ -33,3 +33,6 @@ reference:
     - aoc_input_data_frame
     - aoc_input_matrix
     - aoc_input_vector
+  - title: "Helper functions for working with strings"
+    contents:
+    - extract_numbers
