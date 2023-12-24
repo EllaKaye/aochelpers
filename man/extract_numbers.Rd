@@ -19,5 +19,6 @@ Extract all numbers from a string
 extract_numbers("abc123def456")
 extract_numbers("Game 1:")
 extract_numbers("Cards: 1 3 16 136")
+extract_numbers("1, -3, 16, -136")
 
 }
