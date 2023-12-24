@@ -12,7 +12,7 @@
 #' @examples extract_numbers("Cards: 1 3 16 136")
 #'
 extract_numbers <- function(x) {
-	stringr::str_extract_all(x, "\\d+") |>
+	stringr::str_extract_all(x, "-?\\d+") |>
 		unlist() |>
 		as.numeric()
 }
