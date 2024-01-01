@@ -5,3 +5,4 @@
 * Add user agent to `aoc_get_input()`
 * Add `extract_numbers()` to extract all numbers from a string
 * Add `gcd()` and `lcm()` for finding greatest common divisor and lowest common multiple
+* Add `lines_to_matrix()`

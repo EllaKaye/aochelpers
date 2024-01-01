@@ -117,7 +117,7 @@ aoc_input_matrix <- function(day, year = NULL, mode = c("character", "numeric"),
 
 	input <- readr::read_lines(aoc_input_path(day, year))
 
-	input <- matrix(unlist(strsplit(input, split = split)), nrow = length(input), byrow = TRUE)
+	input <- strsplit(input, split) |> do.call(rbind, args = _)
 
 	if (mode == "numeric") {
 		input <- apply(input, 2, as.numeric)
