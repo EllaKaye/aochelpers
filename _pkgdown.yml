@@ -34,6 +34,7 @@ reference:
     - aoc_input_matrix
     - aoc_input_vector
   - title: "Helpers for wrangling data"
+    contents:
     - lines_to_matrix
   - title: "Helper functions for working with strings"
     contents:
