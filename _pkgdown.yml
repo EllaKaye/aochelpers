@@ -40,5 +40,5 @@ reference:
     - extract_numbers
   - title: "Maths helper functions"
     contents:
-    - gcd
-    - lcm
+    - GCD
+    - LCM

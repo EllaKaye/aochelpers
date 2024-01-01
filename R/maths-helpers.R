@@ -8,10 +8,10 @@
 #' @return The greatest common divisor of x and y
 #' @export
 #'
-#' @examples gcd(12, 18)
-#' @examples gcd(12, 0)
-#' @examples gcd(13, 2)
-gcd <- function(x, y) {
+#' @examples GCD(12, 18)
+#' @examples GCD(12, 0)
+#' @examples GCD(13, 2)
+GCD <- function(x, y) {
 	while (y != 0) {
 		t <- y
 		y <- x %% y
@@ -21,11 +21,11 @@ gcd <- function(x, y) {
 }
 
 
-#' @rdname gcd
+#' @rdname GCD
 #' @export
-#' @examples lcm(12, 18)
-#' @examples lcm(2, 6)
-#' @examples lcm(3, 5)
-lcm <- function(x, y) {
-	x * y / gcd(x, y)
+#' @examples LCM(12, 18)
+#' @examples LCM(2, 6)
+#' @examples LCM(3, 5)
+LCM <- function(x, y) {
+	x * y / GCD(x, y)
 }
