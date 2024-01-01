@@ -36,3 +36,7 @@ reference:
   - title: "Helper functions for working with strings"
     contents:
     - extract_numbers
+  - title: "Maths helper functions"
+    contents:
+    - gcd
+    - lcm
