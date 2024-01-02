@@ -17,7 +17,7 @@ split_at_blanks(lines, mode = c("character", "numeric"), split = "")
 A list, with one element per group originally separated by blank lines.
 }
 \description{
-When the strings represent numbers, it's better to read them in as a character vector using \code{aoc_input_vector()}, then change mode to numeric as part of call to \code{split_at_blanks()}.
+When the strings represent numbers, it's better to read them in as a character vector using \code{\link[=aoc_input_vector]{aoc_input_vector()}}, then change mode to numeric as part of call to \code{split_at_blanks()}.
 }
 \examples{
 x <- c("123", "1234", "", "56", "567", "", "89")
