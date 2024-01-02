@@ -36,6 +36,7 @@ reference:
   - title: "Helpers for wrangling data"
     contents:
     - lines_to_matrix
+    - split_at_blanks
   - title: "Helper functions for working with strings"
     contents:
     - extract_numbers
