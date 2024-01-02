@@ -9,6 +9,8 @@ split_at_blanks(lines, mode = c("character", "numeric"), split = "")
 \arguments{
 \item{lines}{A character vector}
 
+\item{mode}{Character string. One of 'character' or 'numeric'. Default is 'character'.}
+
 \item{split}{character. The string to split the input on. Default is \code{""}, i.e. split at blank lines}
 }
 \value{

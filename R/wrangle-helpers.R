@@ -17,6 +17,7 @@ lines_to_matrix <- function(lines, split = "") {
 #'
 #' When the strings represent numbers, it's better to read them in as a character vector using `aoc_input_vector()`, then change mode to numeric as part of call to `split_at_blanks()`.
 #' @param lines A character vector
+#' @param mode Character string. One of 'character' or 'numeric'. Default is 'character'.
 #' @param split character. The string to split the input on. Default is `""`, i.e. split at blank lines
 #'
 #' @return A list, with one element per group originally separated by blank lines.
