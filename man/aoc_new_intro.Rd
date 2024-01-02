@@ -13,7 +13,7 @@ aoc_new_intro(year = NULL)
 The path to the introduction post (invisibly)
 }
 \description{
-Create an intro post with relative path \code{./YYYY/day/YYYY-intro} (where \code{YYYY}
+Create an intro post with relative path \code{./YYYY/day/introduction} (where \code{YYYY}
 is the value of \code{year}) by copying the template at \verb{./_templates/YYYY-intro}
 and substituting \code{YYYY} for the value of \code{year}, both in the new file name and in the
 file itself.

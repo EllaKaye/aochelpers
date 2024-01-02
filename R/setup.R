@@ -268,10 +268,10 @@ aoc_delete_day <- function(day, year = NULL) {
 #' posts which are in the subdirectory `./YYYY/day` (which echoes the URL
 #' structure of the Advent of Code website). Note that the website will fail to
 #' render if there are no posts under the `day` directory. To avoid that
-#' problem, by default an introduction post `YYYY-intro` is created, assuming
+#' problem, by default an introduction post `introduction` is created, assuming
 #' that the directory `./_templates/YYYY-intro` exists (which it does in the
 #' website template
-#' <https://github.com/EllaKaye/advent-of-code-website-template>. If you don't
+#' <https://github.com/EllaKaye/advent-of-code-website-template>.) If you don't
 #' want an introduction post, set `intro = FALSE`. An introduction post can also
 #' be created separately with [aoc_new_intro()] or deleted with
 #' [aoc_delete_intro()]. Without an introduction post, note that you will need
@@ -319,7 +319,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 	intro_template_path <- here::here("_templates", "YYYY-intro")
 
 	if (intro && dir.exists(intro_template_path)) {
-		intro_post_path <- here::here(year, "day", paste0(year, "-introduction"))
+		intro_post_path <- here::here(year, "day", "introduction")
 		dir.create(intro_post_path, recursive = TRUE)
 		file.copy(list.files(intro_template_path, full.names = TRUE),
 							intro_post_path, recursive = TRUE)
@@ -346,7 +346,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 
 #' Create an introduction post
 #'
-#' Create an intro post with relative path `./YYYY/day/YYYY-intro` (where `YYYY`
+#' Create an intro post with relative path `./YYYY/day/introduction` (where `YYYY`
 #' is the value of `year`) by copying the template at `./_templates/YYYY-intro`
 #' and substituting `YYYY` for the value of `year`, both in the new file name and in the
 #' file itself.
@@ -377,7 +377,7 @@ aoc_new_intro <- function(year = NULL) {
 										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
 	}
 
-	intro_post_path <- here::here(year, "day", paste0(year, "-introduction"))
+	intro_post_path <- here::here(year, "day", "introduction")
 
 	if (!dir.exists(intro_post_path)) {
 		dir.create(intro_post_path)
