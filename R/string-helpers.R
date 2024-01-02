@@ -13,7 +13,9 @@
 #' @examples extract_numbers("1, -3, 16, -136")
 #'
 extract_numbers <- function(x) {
-	stringr::str_extract_all(x, "-?\\d+") |>
+
+	matches <- gregexpr(pattern = "-?\\d+", text = x)
+	regmatches(x, matches) |>
 		unlist() |>
 		as.numeric()
 }
