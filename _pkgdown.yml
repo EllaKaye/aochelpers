@@ -44,3 +44,8 @@ reference:
     contents:
     - GCD
     - LCM
+
+news:
+ releases:
+ - text: "An Advent of Code website, website template and package"
+   href: https://ellakaye.co.uk/posts/2023-11-29_aoc-project/
