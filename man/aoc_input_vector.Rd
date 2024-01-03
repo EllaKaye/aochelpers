@@ -4,24 +4,35 @@
 \alias{aoc_input_vector}
 \title{Read puzzle input as a vector}
 \usage{
-aoc_input_vector(day, year = NULL, mode = c("character", "numeric"))
+aoc_input_vector(
+  day,
+  year = NULL,
+  file = "input",
+  mode = c("character", "numeric")
+)
 }
 \arguments{
 \item{day}{An integer between 1 and 25}
 
 \item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 
-\item{mode}{Character string. One of 'character' or 'numeric'. Default is 'character'.}
+\item{file}{Character string. The name of a file that exists in the directory
+\code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and
+\code{day}. Defaults to \code{"input"}.}
+
+\item{mode}{Character string. One of 'character' or 'numeric'. Default is
+'character'.}
 }
 \value{
 A vector containing the puzzle input for the day and year.
 }
 \description{
-Read in the puzzle input as a vector, one element per line.
-It assumes that the input is stored in a file called \code{input} in the directory
+Read in the puzzle input, or other file, as a vector, one element per line.
+It assumes that the file is stored in the directory
 \code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and \code{day}.
-This will be the case if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}.
-The reading is done by \code{\link[readr:read_lines]{readr::read_lines()}}.
+By default, the file name is \code{"input"}.
+This file will exist in this location if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}. The
+reading is done by \code{\link[=readLines]{readLines()}}.
 }
 \examples{
 \dontrun{aoc_input_vector(1, 2020, "numeric")}

@@ -7,6 +7,7 @@
 aoc_input_matrix(
   day,
   year = NULL,
+  file = "input",
   mode = c("character", "numeric"),
   split = "",
   view = FALSE
@@ -17,9 +18,15 @@ aoc_input_matrix(
 
 \item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 
-\item{mode}{Character string. One of 'character' or 'numeric'. Default is 'character'.}
+\item{file}{Character string. The name of a file that exists in the directory
+\code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and
+\code{day}. Defaults to \code{"input"}.}
 
-\item{split}{character. The string to split the input on. Default is \code{""}, i.e. one character per column}
+\item{mode}{Character string. One of 'character' or 'numeric'. Default is
+'character'.}
+
+\item{split}{character. The string to split the input on. Default is \code{""},
+i.e. one character per column}
 
 \item{view}{logical. If \code{TRUE}, calls \code{\link[utils:View]{utils::View()}} to view the returned input.
 Default is \code{FALSE}}
@@ -28,10 +35,12 @@ Default is \code{FALSE}}
 A matrix containing the puzzle input for the day and year.
 }
 \description{
-Read in the puzzle input as a matrix, one row per line, by default one character per column.
-It assumes that the input is stored in a file called \code{input} in the directory
-\code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and \code{day}.
-This will be the case if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}.
+Read in the puzzle input, or other file, as a matrix, one row per line, by
+default one character per column. It assumes that the file is stored in the
+directory \code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year}
+and \code{day}. By default, the file name is \code{"input"}. This file will exist in
+this location if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}. The initial
+reading is done by \code{\link[=readLines]{readLines()}}.
 }
 \examples{
 \dontrun{aoc_input_matrix(3, 2020)}

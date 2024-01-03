@@ -7,6 +7,7 @@
 aoc_input_data_frame(
   day,
   year = NULL,
+  file = "input",
   class = c("tbl_df", "data.frame"),
   col_names = FALSE,
   show_col_types = FALSE,
@@ -17,6 +18,10 @@ aoc_input_data_frame(
 \item{day}{An integer between 1 and 25}
 
 \item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
+
+\item{file}{Character string. The name of a file that exists in the directory
+\code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and
+\code{day}. Defaults to \code{"input"}.}
 
 \item{class}{character. One of 'tbl_df' or 'data.frame'. Default is 'tbl_df'.}
 
@@ -34,10 +39,11 @@ Default is \code{FALSE}}
 A data frame containing the puzzle input for the day and year.
 }
 \description{
-#' Read in the puzzle input as a data from, one row per line. It assumes that
-the input is stored in a file called \code{input} in the directory
+Read in the puzzle input, or other file, as a data frame, one row per line.
+It assumes that the file is stored in the directory
 \code{"./YYYY/day/DD"}, where \code{YYYY} and \code{DD} are the values of \code{year} and \code{day}.
-This will be the case if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}. If the
+By default, the file name is \code{"input"}.
+This file will exist in this location if the post was created using \code{\link[=aoc_new_day]{aoc_new_day()}}.
 class is \code{tbl_df}, the reading is done by \code{\link[readr:read_table]{readr::read_table()}}. If the class
 is \code{data.frame}, the reading is done by \code{\link[utils:read.table]{utils::read.table()}}.
 The defaults have been chosen to suit typical Advent of Code puzzle input.
