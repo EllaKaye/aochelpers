@@ -7,7 +7,7 @@ aoc_input_path <- function(day, year = NULL, file = "input", check = TRUE) {
 
 	if (check) {
 		if (!file.exists(path)) {
-			cli::cli_abort("No file called {file} found for Day {day} of {year}.")
+			cli::cli_abort("No file {.file {file}} found for Day {day} of {year}.")
 		}
 	}
 	path
