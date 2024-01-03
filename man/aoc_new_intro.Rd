@@ -13,13 +13,13 @@ aoc_new_intro(year = NULL)
 The path to the introduction post (invisibly)
 }
 \description{
-Create an intro post with relative path \code{./YYYY/day/introduction} (where \code{YYYY}
+Create an introduction post with relative path \code{./YYYY/day/introduction} (where \code{YYYY}
 is the value of \code{year}) by copying the template at \verb{./_templates/YYYY-intro}
 and substituting \code{YYYY} for the value of \code{year}, both in the new file name and in the
 file itself.
 }
 \examples{
-\dontrun{aoc_new_introduction(2022)}
+\dontrun{aoc_new_intro(2022)}
 }
 \seealso{
 \code{\link[=aoc_delete_intro]{aoc_delete_intro()}} \code{\link[=aoc_new_year]{aoc_new_year()}}

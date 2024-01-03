@@ -24,10 +24,12 @@ reference:
     - aoc_new_day
     - aoc_new_post
     - aoc_new_intro
+    - aoc_new_conclusion
     - aoc_get_input
     - aoc_delete_year
     - aoc_delete_day
     - aoc_delete_intro
+    - aoc_delete_conclusion
   - title: "Read in puzzle input stored in your Quarto website"
     contents:
     - aoc_input_data_frame

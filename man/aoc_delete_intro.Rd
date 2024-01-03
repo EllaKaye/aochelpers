@@ -10,11 +10,11 @@ aoc_delete_intro(year = NULL)
 \item{year}{An integer representing the year, from 2015 to the current year. Defaults to the current year.}
 }
 \description{
-Delete the introduction post with relative path \code{./YYYY/day/YYYY-intro} (where \code{YYYY}
+Delete the introduction post with relative path \code{./YYYY/day/introduction} (where \code{YYYY}
 is the value of \code{year}), if it exists.
 }
 \examples{
-\dontrun{aoc_delete_introduction(2022)}
+\dontrun{aoc_delete_intro(2022)}
 }
 \seealso{
 \code{\link[=aoc_new_intro]{aoc_new_intro()}} \code{\link[=aoc_new_year]{aoc_new_year()}} \code{\link[=aoc_delete_year]{aoc_delete_year()}}

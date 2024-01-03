@@ -9,3 +9,4 @@
 * Add `split_at_blanks()` to create list from input, with one element per group originally separated by blank lines
 * Update `aoc_input_vector()` and `aoc_input_matrix()` to use `readLines()`
 * Add `file` argument to `aoc_input_vector()`, `aoc_input_data_frame()` and `aoc_input_matrix()` to read in any file in the directory for the given `day` and `year`.
+* Add `aoc_new_conclusion()` and `aoc_delete_conclusion()` functions to create and delete conclusion posts.

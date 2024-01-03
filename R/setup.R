@@ -346,7 +346,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 
 #' Create an introduction post
 #'
-#' Create an intro post with relative path `./YYYY/day/introduction` (where `YYYY`
+#' Create an introduction post with relative path `./YYYY/day/introduction` (where `YYYY`
 #' is the value of `year`) by copying the template at `./_templates/YYYY-intro`
 #' and substituting `YYYY` for the value of `year`, both in the new file name and in the
 #' file itself.
@@ -358,7 +358,7 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 #'
 #' @seealso [aoc_delete_intro()] [aoc_new_year()]
 #'
-#' @examples \dontrun{aoc_new_introduction(2022)}
+#' @examples \dontrun{aoc_new_intro(2022)}
 aoc_new_intro <- function(year = NULL) {
 	if (is.null(year)) year <- current_year()
 	check_year(year)
@@ -394,7 +394,7 @@ aoc_new_intro <- function(year = NULL) {
 
 #' Delete an introduction post
 #'
-#' Delete the introduction post with relative path `./YYYY/day/YYYY-intro` (where `YYYY`
+#' Delete the introduction post with relative path `./YYYY/day/introduction` (where `YYYY`
 #' is the value of `year`), if it exists.
 #'
 #' @inheritParams aoc_url
@@ -403,21 +403,93 @@ aoc_new_intro <- function(year = NULL) {
 #'
 #' @seealso [aoc_new_intro()] [aoc_new_year()] [aoc_delete_year()]
 #'
-#' @examples \dontrun{aoc_delete_introduction(2022)}
+#' @examples \dontrun{aoc_delete_intro(2022)}
 aoc_delete_intro <- function(year = NULL) {
 	if (is.null(year)) year <- current_year()
 	check_year(year)
 
-	intro_post_path <- here::here(year, "day", paste0(year, "-introduction"))
+	intro_post_path <- here::here(year, "day", "introduction")
 
 	if (!dir.exists(intro_post_path)) {
-		cli::cli_abort(c("You must have a directory {.file {year}/day/{year}-introduction}",
+		cli::cli_abort(c("You must have a directory {.file {year}/day/introduction}",
 										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
 	}
 
 	unlink(intro_post_path, recursive = TRUE)
 }
 
+#' Create a conclusion post
+#'
+#' Create a conclusion post with relative path `./YYYY/day/conclusion` (where `YYYY`
+#' is the value of `year`) by copying the template at `./_templates/YYYY-conclusion`
+#' and substituting `YYYY` for the value of `year`, both in the new file name and in the
+#' file itself.
+#'
+#' @inheritParams aoc_url
+#'
+#' @return The path to the conclusion post (invisibly)
+#' @export
+#'
+#' @seealso [aoc_delete_conclusion()]
+#'
+#' @examples \dontrun{aoc_new_introduction(2022)}
+aoc_new_conclusion <- function(year = NULL) {
+	if (is.null(year)) year <- current_year()
+	check_year(year)
+
+	year_path <- here::here(year)
+
+	# create new year directory if it doesn't exist
+	if (!dir.exists(year_path)) {
+		dir.create(year_path)
+	}
+
+	conclusion_template_path <- here::here("_templates", "YYYY-conclusion")
+
+	if (!dir.exists(conclusion_template_path)) {
+		cli::cli_abort(c("You must have a directory {.file _templates/YYYY-conclusion} in your {.file _templates} directory.",
+										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
+	}
+
+	conclusion_post_path <- here::here(year, "day", "conclusion")
+
+	if (!dir.exists(conclusion_post_path)) {
+		dir.create(conclusion_post_path)
+	}
+
+	file.copy(list.files(conclusion_template_path, full.names = TRUE),
+						conclusion_post_path, recursive = TRUE)
+	intro_index_path <- paste0(conclusion_post_path, "/index.qmd")
+	gsub_YYYY_DD(intro_index_path, "DD", year)
+
+	invisible(conclusion_post_path)
+
+}
+
+#' Delete a conclusion post
+#'
+#' Delete the introduction post with relative path `./YYYY/day/conclusion` (where `YYYY`
+#' is the value of `year`), if it exists.
+#'
+#' @inheritParams aoc_url
+#'
+#' @export
+#'
+#' @seealso [aoc_new_conclusion()]
+#'
+#' @examples \dontrun{aoc_delete_conclusion(2022)}
+aoc_delete_conclusion <- function(year = NULL) {
+	if (is.null(year)) year <- current_year()
+	check_year(year)
+
+	conclusion_post_path <- here::here(year, "day", "conclusion")
+
+	if (!dir.exists(conclusion_post_path)) {
+		cli::cli_abort(c("You must have a directory {.file {year}/day/conclusion}"))
+	}
+
+	unlink(conclusion_post_path, recursive = TRUE)
+}
 
 #' @rdname aoc_delete_day
 #' @export
