@@ -10,7 +10,7 @@
 #'
 #' @examples lines_to_matrix(c("#.#.", "..#.", "##.."))
 lines_to_matrix <- function(lines, split = "") {
-	strsplit(lines, split) |> do.call(rbind, args = _)
+  strsplit(lines, split) |> do.call(rbind, args = _)
 }
 
 #' Split input into groups
@@ -28,20 +28,16 @@ lines_to_matrix <- function(lines, split = "") {
 #' @examples split_at_blanks(x, "numeric")
 #'
 split_at_blanks <- function(lines, mode = c("character", "numeric"), split = "") {
+  mode <- rlang::arg_match(mode)
 
-	mode <- rlang::arg_match(mode)
+  groups <- lines |>
+    # the `+1` means groups will be named `1`, `2`, etc
+    split(cumsum(lines == split) + 1) |>
+    lapply(\(x) x[x != ""])
 
-	groups <- lines |>
-		# the `+1` means groups will be named `1`, `2`, etc
-		split(cumsum(lines == split) + 1) |>
-		lapply(\(x) x[x != ""])
+  if (mode == "numeric") {
+    groups <- lapply(groups, as.numeric)
+  }
 
-	if (mode == "numeric") {
-		groups <- lapply(groups, as.numeric)
-	}
-
-	groups
+  groups
 }
-
-
-

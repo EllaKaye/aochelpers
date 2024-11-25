@@ -13,24 +13,24 @@
 #' @examples
 #' aoc_url(1, 2022)
 aoc_url <- function(day, year = NULL, browse = FALSE) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
-	url <- paste0("https://adventofcode.com/", year, "/day/", day)
-	if (browse) utils::browseURL(url)
-	url
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
+  url <- paste0("https://adventofcode.com/", year, "/day/", day)
+  if (browse) utils::browseURL(url)
+  url
 }
 
 #' @rdname aoc_url
 #' @export
 #' @examples aoc_url_input(1, 2022)
 aoc_url_input <- function(day, year = NULL, browse = FALSE) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
-	url <- paste0("https://adventofcode.com/", year, "/day/", day, "/input")
-	if (browse) utils::browseURL(url)
-	url
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
+  url <- paste0("https://adventofcode.com/", year, "/day/", day, "/input")
+  if (browse) utils::browseURL(url)
+  url
 }
 
 #' Get and save the puzzle input
@@ -59,44 +59,49 @@ aoc_url_input <- function(day, year = NULL, browse = FALSE) {
 #'   input file.
 #' @export
 #' @seealso [aoc_new_day()] [aoc_input_vector()] [aoc_input_data_frame()] [aoc_input_matrix()
-#' @examples \dontrun{aoc_get_input(1, 2022)}
+#' @examples \dontrun{
+#' aoc_get_input(1, 2022)
+#' }
 aoc_get_input <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
-	check_published(day, year)
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
+  check_published(day, year)
 
-	session <- Sys.getenv("ADVENT_SESSION")
-	if (session == "") {
-		cli::cli_abort(c("You must set `ADVENT_SESSION` in your {.file ~/.Renviron} file.",
-										 "!" = "See {.fun aochelpers::aoc_get_input} for more information."))
-	}
+  session <- Sys.getenv("ADVENT_SESSION")
+  if (session == "") {
+    cli::cli_abort(c("You must set `ADVENT_SESSION` in your {.file ~/.Renviron} file.",
+      "!" = "See {.fun aochelpers::aoc_get_input} for more information."
+    ))
+  }
 
-	url <- aoc_url_input(day, year)
+  url <- aoc_url_input(day, year)
 
-	year_path <- here::here(year)
-	day_path <- here::here(year_path, "day", day)
-	input_path <- here::here(day_path, "input")
+  year_path <- here::here(year)
+  day_path <- here::here(year_path, "day", day)
+  input_path <- here::here(day_path, "input")
 
-	# check if there's a directory for the year and create one if not
-	if (!dir.exists(year_path)) {
-		dir.create(year_path)
-	}
+  # check if there's a directory for the year and create one if not
+  if (!dir.exists(year_path)) {
+    dir.create(year_path)
+  }
 
-	# check if there's a directory for the day and create one if not
-	if (!dir.exists(day_path)) {
-		dir.create(day_path, recursive = TRUE)
-	}
+  # check if there's a directory for the day and create one if not
+  if (!dir.exists(day_path)) {
+    dir.create(day_path, recursive = TRUE)
+  }
 
-	# get and save the input
-	req <- httr::GET(url,
-									 httr::set_cookies(session = session),
-									 httr::user_agent("aochelpers R package <https://github.com/EllaKaye/aochelpers> by hello@ellakaye.co.uk"),
-									 httr::write_disk(input_path, overwrite = TRUE))
+  # get and save the input
+  req <- httr::GET(
+    url,
+    httr::set_cookies(session = session),
+    httr::user_agent("aochelpers R package <https://github.com/EllaKaye/aochelpers> by hello@ellakaye.co.uk"),
+    httr::write_disk(input_path, overwrite = TRUE)
+  )
 
-	httr::stop_for_status(req)
+  httr::stop_for_status(req)
 
-	invisible(input_path)
+  invisible(input_path)
 }
 
 #' Set up a new day
@@ -127,95 +132,101 @@ aoc_get_input <- function(day, year = NULL) {
 #'
 #' @seealso [aoc_get_input()]
 #'
-#' @examples \dontrun{aoc_new_day(1, 2022)}
+#' @examples \dontrun{
+#' aoc_new_day(1, 2022)
+#' }
 aoc_new_day <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
+  if (is.null(year)) year <- current_year()
 
-	day_path <- here::here(year, "day", day)
+  day_path <- here::here(year, "day", day)
 
-	if (dir.exists(day_path)) {
-		cli::cli_abort("A directory for Day {day} of {year} already exists.")
-	}
+  if (dir.exists(day_path)) {
+    cli::cli_abort("A directory for Day {day} of {year} already exists.")
+  }
 
-	aoc_get_input(day, year)
-	aoc_new_post(day, year)
+  aoc_get_input(day, year)
+  aoc_new_post(day, year)
 
-	invisible(day_path)
+  invisible(day_path)
 }
 
 #' @rdname aoc_new_day
 #' @inheritParams aoc_url
 #' @export
-#' @examples \dontrun{aoc_new_post(1, 2022)}
+#' @examples \dontrun{
+#' aoc_new_post(1, 2022)
+#' }
 aoc_new_post <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
 
-	year_path <- here::here(year)
-	day_path <- here::here(year_path, "day", day)
+  year_path <- here::here(year)
+  day_path <- here::here(year_path, "day", day)
 
-	# if year doesn't exist, create it
-	if (!dir.exists(year_path)) {
-		dir.create(year_path)
-	}
+  # if year doesn't exist, create it
+  if (!dir.exists(year_path)) {
+    dir.create(year_path)
+  }
 
-	# if day doesn't exist, create it
-	if (!dir.exists(day_path)) {
-		dir.create(day_path, recursive = TRUE)
-	}
+  # if day doesn't exist, create it
+  if (!dir.exists(day_path)) {
+    dir.create(day_path, recursive = TRUE)
+  }
 
-	template_path <- here::here("_templates", "post-template")
+  template_path <- here::here("_templates", "post-template")
 
-	if (!dir.exists(template_path)) {
-		cli::cli_abort(c("You must have a directory {.file _templates/post-template} in your project.",
-										 "!" = "See {.fun aochelpers::aoc_new_post} for more information."))
-	}
+  if (!dir.exists(template_path)) {
+    cli::cli_abort(c("You must have a directory {.file _templates/post-template} in your project.",
+      "!" = "See {.fun aochelpers::aoc_new_post} for more information."
+    ))
+  }
 
-	file.copy(list.files(template_path, full.names = TRUE),
-						day_path,
-						recursive = TRUE)
+  file.copy(list.files(template_path, full.names = TRUE),
+    day_path,
+    recursive = TRUE
+  )
 
-	# get index.qmd from the new post and swap YYYY and DD for the year and day
+  # get index.qmd from the new post and swap YYYY and DD for the year and day
 
-	if (!file.exists(paste0(day_path, "/index.qmd"))) {
-		cli::cli_abort(c("You must have a file {.file index.qmd} in your {.file _templates/post-template} directory.",
-										 "!" = "See {.fun aochelpers::aoc_new_post} for more information."))
-	}
+  if (!file.exists(paste0(day_path, "/index.qmd"))) {
+    cli::cli_abort(c("You must have a file {.file index.qmd} in your {.file _templates/post-template} directory.",
+      "!" = "See {.fun aochelpers::aoc_new_post} for more information."
+    ))
+  }
 
-	index_path <- paste0(day_path, "/index.qmd")
-	gsub_YYYY_DD(index_path, day, year)
+  index_path <- paste0(day_path, "/index.qmd")
+  gsub_YYYY_DD(index_path, day, year)
 
-	# if there's a script.R, read it in and substitute the year and day
-	script_path <- paste0(day_path, "/script.R")
-	if (file.exists(script_path)) {
-		gsub_YYYY_DD(script_path, day, year)
-	}
+  # if there's a script.R, read it in and substitute the year and day
+  script_path <- paste0(day_path, "/script.R")
+  if (file.exists(script_path)) {
+    gsub_YYYY_DD(script_path, day, year)
+  }
 
-	invisible(day_path)
-
+  invisible(day_path)
 }
 
 # delete post for a given day and year
 # don't export
 aoc_delete_post <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
 
-	post <- here::here(year, "day", day, "index.qmd")
-	unlink(post, recursive = TRUE)
+  post <- here::here(year, "day", day, "index.qmd")
+  unlink(post, recursive = TRUE)
 }
 
 # don't export
 # delete the input for a given day and year
 aoc_delete_input <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
 
-	input_path <- here::here(year, "day", day, "input")
-	unlink(input_path)
+  input_path <- here::here(year, "day", day, "input")
+  unlink(input_path)
 }
 
 #' Delete the directory for a day or year
@@ -233,27 +244,29 @@ aoc_delete_input <- function(day, year = NULL) {
 #' @return The path of the day that was deleted (invisibly)
 #' @export
 #'
-#' @examples \dontrun{aoc_delete_day(1, 2022)}
+#' @examples \dontrun{
+#' aoc_delete_day(1, 2022)
+#' }
 aoc_delete_day <- function(day, year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_day(day)
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_day(day)
+  check_year(year)
 
-	day_path <- here::here(year, "day", day)
-	day_freeze_path <- here::here("_freeze", year, "day", day)
+  day_path <- here::here(year, "day", day)
+  day_freeze_path <- here::here("_freeze", year, "day", day)
 
-	if (!dir.exists(day_path)) {
-		cli::cli_abort("No directory found for Day {day} of {year}.")
-	}
+  if (!dir.exists(day_path)) {
+    cli::cli_abort("No directory found for Day {day} of {year}.")
+  }
 
-	unlink(day_path, recursive = TRUE)
+  unlink(day_path, recursive = TRUE)
 
-	if (dir.exists(day_freeze_path)) {
-		unlink(day_freeze_path, recursive = TRUE)
-	}
+  if (dir.exists(day_freeze_path)) {
+    unlink(day_freeze_path, recursive = TRUE)
+  }
 
 
-	invisible(day_path)
+  invisible(day_path)
 }
 
 #' Create directory and files for a new year
@@ -296,51 +309,56 @@ aoc_delete_day <- function(day, year = NULL) {
 #' @seealso [aoc_new_day()], [aoc_new_intro()], [aoc_delete_intro()],
 #'   [aoc_delete_year()]
 #'
-#' @examples \dontrun{aoc_new_year(2022)}
+#' @examples \dontrun{
+#' aoc_new_year(2022)
+#' }
 aoc_new_year <- function(year = NULL, intro = TRUE) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	year_path <- here::here(year)
+  year_path <- here::here(year)
 
-	# create new year directory if it doesn't exist
-	if (!dir.exists(year_path)) {
-		dir.create(year_path)
-	}
+  # create new year directory if it doesn't exist
+  if (!dir.exists(year_path)) {
+    dir.create(year_path)
+  }
 
-	# copy the _YYYY.qmd to year.qmd and replace YYYY with the year
-	# doesn't matter what we use as 'day' here, since there's no "DD" in "_YYYY.qmd"
-	listing_path <- here::here(paste0(year, ".qmd"))
-	template_path <- here::here("_templates", "YYYY.qmd")
-	file.copy(template_path, listing_path)
-	gsub_YYYY_DD(listing_path, "DD", year)
+  # copy the _YYYY.qmd to year.qmd and replace YYYY with the year
+  # doesn't matter what we use as 'day' here, since there's no "DD" in "_YYYY.qmd"
+  listing_path <- here::here(paste0(year, ".qmd"))
+  template_path <- here::here("_templates", "YYYY.qmd")
+  file.copy(template_path, listing_path)
+  gsub_YYYY_DD(listing_path, "DD", year)
 
 
-	intro_template_path <- here::here("_templates", "YYYY-intro")
+  intro_template_path <- here::here("_templates", "YYYY-intro")
 
-	if (intro && dir.exists(intro_template_path)) {
-		intro_post_path <- here::here(year, "day", "introduction")
-		dir.create(intro_post_path, recursive = TRUE)
-		file.copy(list.files(intro_template_path, full.names = TRUE),
-							intro_post_path, recursive = TRUE)
-		intro_index_path <- paste0(intro_post_path, "/index.qmd")
-		gsub_YYYY_DD(intro_index_path, "DD", year)
-	}
+  if (intro && dir.exists(intro_template_path)) {
+    intro_post_path <- here::here(year, "day", "introduction")
+    dir.create(intro_post_path, recursive = TRUE)
+    file.copy(list.files(intro_template_path, full.names = TRUE),
+      intro_post_path,
+      recursive = TRUE
+    )
+    intro_index_path <- paste0(intro_post_path, "/index.qmd")
+    gsub_YYYY_DD(intro_index_path, "DD", year)
+  }
 
-	day_path <- here::here(year, "day")
-	metadata_path <- here::here("_templates", "_metadata.yml")
-	if (file.exists(metadata_path)) {
-		if (!dir.exists(day_path)) {
-			dir.create(day_path)
-		}
-		file.copy(metadata_path, here::here(year, "day", "_metadata.yml"))
-	}
+  day_path <- here::here(year, "day")
+  metadata_path <- here::here("_templates", "_metadata.yml")
+  if (file.exists(metadata_path)) {
+    if (!dir.exists(day_path)) {
+      dir.create(day_path)
+    }
+    file.copy(metadata_path, here::here(year, "day", "_metadata.yml"))
+  }
 
-	# message reminder to update _quarto.yml
-	cli::cli_bullets(c(
-		"!" = "Don't forget to update _quarto.yml, to list {year}.qmd in the navbar."))
+  # message reminder to update _quarto.yml
+  cli::cli_bullets(c(
+    "!" = "Don't forget to update _quarto.yml, to list {year}.qmd in the navbar."
+  ))
 
-	invisible(year_path)
+  invisible(year_path)
 }
 
 
@@ -358,38 +376,42 @@ aoc_new_year <- function(year = NULL, intro = TRUE) {
 #'
 #' @seealso [aoc_delete_intro()] [aoc_new_year()]
 #'
-#' @examples \dontrun{aoc_new_intro(2022)}
+#' @examples \dontrun{
+#' aoc_new_intro(2022)
+#' }
 aoc_new_intro <- function(year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	year_path <- here::here(year)
+  year_path <- here::here(year)
 
-	# create new year directory if it doesn't exist
-	if (!dir.exists(year_path)) {
-		dir.create(year_path)
-	}
+  # create new year directory if it doesn't exist
+  if (!dir.exists(year_path)) {
+    dir.create(year_path)
+  }
 
-	intro_template_path <- here::here("_templates", "YYYY-intro")
+  intro_template_path <- here::here("_templates", "YYYY-intro")
 
-	if (!dir.exists(intro_template_path)) {
-		cli::cli_abort(c("You must have a directory {.file _templates/YYYY-intro} in your {.file _templates} directory.",
-										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
-	}
+  if (!dir.exists(intro_template_path)) {
+    cli::cli_abort(c("You must have a directory {.file _templates/YYYY-intro} in your {.file _templates} directory.",
+      "!" = "See {.fun aochelpers::aoc_new_year} for more information."
+    ))
+  }
 
-	intro_post_path <- here::here(year, "day", "introduction")
+  intro_post_path <- here::here(year, "day", "introduction")
 
-	if (!dir.exists(intro_post_path)) {
-		dir.create(intro_post_path)
-	}
+  if (!dir.exists(intro_post_path)) {
+    dir.create(intro_post_path)
+  }
 
-	file.copy(list.files(intro_template_path, full.names = TRUE),
-						intro_post_path, recursive = TRUE)
-	intro_index_path <- paste0(intro_post_path, "/index.qmd")
-	gsub_YYYY_DD(intro_index_path, "DD", year)
+  file.copy(list.files(intro_template_path, full.names = TRUE),
+    intro_post_path,
+    recursive = TRUE
+  )
+  intro_index_path <- paste0(intro_post_path, "/index.qmd")
+  gsub_YYYY_DD(intro_index_path, "DD", year)
 
-	invisible(intro_post_path)
-
+  invisible(intro_post_path)
 }
 
 #' Delete an introduction post
@@ -403,19 +425,22 @@ aoc_new_intro <- function(year = NULL) {
 #'
 #' @seealso [aoc_new_intro()] [aoc_new_year()] [aoc_delete_year()]
 #'
-#' @examples \dontrun{aoc_delete_intro(2022)}
+#' @examples \dontrun{
+#' aoc_delete_intro(2022)
+#' }
 aoc_delete_intro <- function(year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	intro_post_path <- here::here(year, "day", "introduction")
+  intro_post_path <- here::here(year, "day", "introduction")
 
-	if (!dir.exists(intro_post_path)) {
-		cli::cli_abort(c("You must have a directory {.file {year}/day/introduction}",
-										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
-	}
+  if (!dir.exists(intro_post_path)) {
+    cli::cli_abort(c("You must have a directory {.file {year}/day/introduction}",
+      "!" = "See {.fun aochelpers::aoc_new_year} for more information."
+    ))
+  }
 
-	unlink(intro_post_path, recursive = TRUE)
+  unlink(intro_post_path, recursive = TRUE)
 }
 
 #' Create a conclusion post
@@ -432,38 +457,42 @@ aoc_delete_intro <- function(year = NULL) {
 #'
 #' @seealso [aoc_delete_conclusion()]
 #'
-#' @examples \dontrun{aoc_new_introduction(2022)}
+#' @examples \dontrun{
+#' aoc_new_introduction(2022)
+#' }
 aoc_new_conclusion <- function(year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	year_path <- here::here(year)
+  year_path <- here::here(year)
 
-	# create new year directory if it doesn't exist
-	if (!dir.exists(year_path)) {
-		dir.create(year_path)
-	}
+  # create new year directory if it doesn't exist
+  if (!dir.exists(year_path)) {
+    dir.create(year_path)
+  }
 
-	conclusion_template_path <- here::here("_templates", "YYYY-conclusion")
+  conclusion_template_path <- here::here("_templates", "YYYY-conclusion")
 
-	if (!dir.exists(conclusion_template_path)) {
-		cli::cli_abort(c("You must have a directory {.file _templates/YYYY-conclusion} in your {.file _templates} directory.",
-										 "!" = "See {.fun aochelpers::aoc_new_year} for more information."))
-	}
+  if (!dir.exists(conclusion_template_path)) {
+    cli::cli_abort(c("You must have a directory {.file _templates/YYYY-conclusion} in your {.file _templates} directory.",
+      "!" = "See {.fun aochelpers::aoc_new_year} for more information."
+    ))
+  }
 
-	conclusion_post_path <- here::here(year, "day", "conclusion")
+  conclusion_post_path <- here::here(year, "day", "conclusion")
 
-	if (!dir.exists(conclusion_post_path)) {
-		dir.create(conclusion_post_path)
-	}
+  if (!dir.exists(conclusion_post_path)) {
+    dir.create(conclusion_post_path)
+  }
 
-	file.copy(list.files(conclusion_template_path, full.names = TRUE),
-						conclusion_post_path, recursive = TRUE)
-	intro_index_path <- paste0(conclusion_post_path, "/index.qmd")
-	gsub_YYYY_DD(intro_index_path, "DD", year)
+  file.copy(list.files(conclusion_template_path, full.names = TRUE),
+    conclusion_post_path,
+    recursive = TRUE
+  )
+  intro_index_path <- paste0(conclusion_post_path, "/index.qmd")
+  gsub_YYYY_DD(intro_index_path, "DD", year)
 
-	invisible(conclusion_post_path)
-
+  invisible(conclusion_post_path)
 }
 
 #' Delete a conclusion post
@@ -477,40 +506,44 @@ aoc_new_conclusion <- function(year = NULL) {
 #'
 #' @seealso [aoc_new_conclusion()]
 #'
-#' @examples \dontrun{aoc_delete_conclusion(2022)}
+#' @examples \dontrun{
+#' aoc_delete_conclusion(2022)
+#' }
 aoc_delete_conclusion <- function(year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	conclusion_post_path <- here::here(year, "day", "conclusion")
+  conclusion_post_path <- here::here(year, "day", "conclusion")
 
-	if (!dir.exists(conclusion_post_path)) {
-		cli::cli_abort(c("You must have a directory {.file {year}/day/conclusion}"))
-	}
+  if (!dir.exists(conclusion_post_path)) {
+    cli::cli_abort(c("You must have a directory {.file {year}/day/conclusion}"))
+  }
 
-	unlink(conclusion_post_path, recursive = TRUE)
+  unlink(conclusion_post_path, recursive = TRUE)
 }
 
 #' @rdname aoc_delete_day
 #' @export
 #'
-#' @examples \dontrun{aoc_delete_year(2022)}
+#' @examples \dontrun{
+#' aoc_delete_year(2022)
+#' }
 aoc_delete_year <- function(year = NULL) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
 
-	year_path <- here::here(year)
-	unlink(year_path, recursive = TRUE)
+  year_path <- here::here(year)
+  unlink(year_path, recursive = TRUE)
 
-	freeze_path <- here::here("_freeze", year)
+  freeze_path <- here::here("_freeze", year)
 
-	if (dir.exists(freeze_path)) {
-		unlink(freeze_path, recursive = TRUE)
-	}
+  if (dir.exists(freeze_path)) {
+    unlink(freeze_path, recursive = TRUE)
+  }
 
-	unlink(paste0(year, ".qmd"))
-	# message reminder to update _quarto.yml
-	cli::cli_bullets(c(
-		"!" = "You may need to update _quarto.yml, to remove {year}.qmd from the navbar."))
+  unlink(paste0(year, ".qmd"))
+  # message reminder to update _quarto.yml
+  cli::cli_bullets(c(
+    "!" = "You may need to update _quarto.yml, to remove {year}.qmd from the navbar."
+  ))
 }
-

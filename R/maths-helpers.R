@@ -12,12 +12,12 @@
 #' @examples GCD(12, 0)
 #' @examples GCD(13, 2)
 GCD <- function(x, y) {
-	while (y != 0) {
-		t <- y
-		y <- x %% y
-		x <- t
-	}
-	x
+  while (y != 0) {
+    t <- y
+    y <- x %% y
+    x <- t
+  }
+  x
 }
 
 
@@ -27,5 +27,5 @@ GCD <- function(x, y) {
 #' @examples LCM(2, 6)
 #' @examples LCM(3, 5)
 LCM <- function(x, y) {
-	x * y / GCD(x, y)
+  x * y / GCD(x, y)
 }

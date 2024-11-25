@@ -6,4 +6,3 @@ test_that("aoc_input_path works", {
   expect_error(aoc_input_path("01", 2022, class = "invalid_day"))
   expect_error(aoc_input_path(1, 2014, class = "invalid_year"))
 })
-

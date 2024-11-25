@@ -48,7 +48,7 @@ day values will be inserted.
 ``` r
 library(aochelpers)
 # Add a listing page a directory for a new year
-aoc_new_year() # current year 
+aoc_new_year() # current year
 aoc_new_year(2022) # specified year
 
 # Add a post for a new day

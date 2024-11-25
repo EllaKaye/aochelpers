@@ -1,16 +1,16 @@
 # get the input path given day and year
 aoc_input_path <- function(day, year = NULL, file = "input", check = TRUE) {
-	if (is.null(year)) year <- current_year()
-	check_year(year)
-	check_day(day)
-	path <- here::here(year, "day", day, file)
+  if (is.null(year)) year <- current_year()
+  check_year(year)
+  check_day(day)
+  path <- here::here(year, "day", day, file)
 
-	if (check) {
-		if (!file.exists(path)) {
-			cli::cli_abort("No file {.file {file}} found for Day {day} of {year}.")
-		}
-	}
-	path
+  if (check) {
+    if (!file.exists(path)) {
+      cli::cli_abort("No file {.file {file}} found for Day {day} of {year}.")
+    }
+  }
+  path
 }
 
 #' Read puzzle input as a vector
@@ -33,21 +33,23 @@ aoc_input_path <- function(day, year = NULL, file = "input", check = TRUE) {
 #' @export
 #' @seealso [aoc_input_data_frame()] [aoc_input_matrix()]
 #'
-#' @examples \dontrun{aoc_input_vector(1, 2020, "numeric")}
+#' @examples \dontrun{
+#' aoc_input_vector(1, 2020, "numeric")
+#' }
 aoc_input_vector <- function(day, year = NULL, file = "input", mode = c("character", "numeric")) {
-	if (is.null(year)) year <- current_year()
+  if (is.null(year)) year <- current_year()
 
-	mode <- rlang::arg_match(mode)
+  mode <- rlang::arg_match(mode)
 
-	path <- aoc_input_path(day, year, file)
+  path <- aoc_input_path(day, year, file)
 
-	input <- readLines(path)
+  input <- readLines(path)
 
-	if (mode == "numeric") {
-		input <- as.numeric(input)
-	}
+  if (mode == "numeric") {
+    input <- as.numeric(input)
+  }
 
-	input
+  input
 }
 
 #' Read puzzle input as a data frame
@@ -76,24 +78,28 @@ aoc_input_vector <- function(day, year = NULL, file = "input", mode = c("charact
 #'
 #' @seealso [aoc_input_vector()] [aoc_input_matrix()]
 #'
-#' @examples \dontrun{aoc_input_data_frame(8, 2020)}
+#' @examples \dontrun{
+#' aoc_input_data_frame(8, 2020)
+#' }
 aoc_input_data_frame <- function(day, year = NULL, file = "input", class = c("tbl_df", "data.frame"),
-																 col_names = FALSE, show_col_types = FALSE,
-																 view = FALSE) {
-	if (is.null(year)) year <- current_year()
+                                 col_names = FALSE, show_col_types = FALSE,
+                                 view = FALSE) {
+  if (is.null(year)) year <- current_year()
 
-	path <- aoc_input_path(day, year, file)
-	class <- rlang::arg_match(class)
+  path <- aoc_input_path(day, year, file)
+  class <- rlang::arg_match(class)
 
-	if (class == "tbl_df") {
-		input <- readr::read_table(path, col_names = col_names, show_col_types = show_col_types)
-	} else if (class == "data.frame") {
-		input <- utils::read.table(path)
-	}
+  if (class == "tbl_df") {
+    input <- readr::read_table(path, col_names = col_names, show_col_types = show_col_types)
+  } else if (class == "data.frame") {
+    input <- utils::read.table(path)
+  }
 
-	if (view) {utils::View(input)}
+  if (view) {
+    utils::View(input)
+  }
 
-	input
+  input
 }
 
 #' Read puzzle input as a matrix
@@ -115,23 +121,26 @@ aoc_input_data_frame <- function(day, year = NULL, file = "input", class = c("tb
 #'
 #' @seealso [aoc_input_vector()] [aoc_input_data_frame()]
 #'
-#' @examples \dontrun{aoc_input_matrix(3, 2020)}
+#' @examples \dontrun{
+#' aoc_input_matrix(3, 2020)
+#' }
 aoc_input_matrix <- function(day, year = NULL, file = "input", mode = c("character", "numeric"), split = "",
-														 view = FALSE) {
-	if (is.null(year)) year <- current_year()
+                             view = FALSE) {
+  if (is.null(year)) year <- current_year()
 
-	mode <- rlang::arg_match(mode)
+  mode <- rlang::arg_match(mode)
 
-	input <- readLines(aoc_input_path(day, year, file))
+  input <- readLines(aoc_input_path(day, year, file))
 
-	input <- strsplit(input, split) |> do.call(rbind, args = _)
+  input <- strsplit(input, split) |> do.call(rbind, args = _)
 
-	if (mode == "numeric") {
-		input <- apply(input, 2, as.numeric)
-	}
+  if (mode == "numeric") {
+    input <- apply(input, 2, as.numeric)
+  }
 
-	if (view) {utils::View(input)}
+  if (view) {
+    utils::View(input)
+  }
 
-	input
+  input
 }
-
